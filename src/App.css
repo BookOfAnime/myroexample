@@ -1,16 +1,21 @@
-/* App.css */
 :root {
   --primary-color: #40E0D0;
   --secondary-color: #4169E1;
   --accent-color: #8A2BE2;
   --background-color: #0B0B0B;
   --text-color: #FFFFFF;
+  --header-height: 60px;
+  --glow-color: #40E0D0;
 }
 
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+}
+
+html, body {
+  overflow: hidden;
 }
 
 body {
@@ -21,7 +26,10 @@ body {
 }
 
 .app {
-  overflow-x: hidden;
+  height: 100vh;
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
 }
 
 /* Header Styles */
@@ -29,11 +37,14 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 2rem;
-  position: sticky;
+  padding: 0 2rem;
+  position: fixed;
   top: 0;
+  left: 0;
+  right: 0;
   background-color: rgba(11, 11, 11, 0.9);
   z-index: 1000;
+  height: var(--header-height);
 }
 
 .logo {
@@ -63,11 +74,36 @@ body {
 .nav-item {
   color: var(--text-color);
   text-decoration: none;
+  position: relative;
+  padding: 0.5rem 0;
   transition: color 0.3s ease;
+}
+
+.nav-item::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: var(--primary-color);
+  visibility: hidden;
+  transform: scaleX(0);
+  transition: all 0.3s ease-in-out;
 }
 
 .nav-item:hover {
   color: var(--primary-color);
+}
+
+.nav-item:hover::before {
+  visibility: visible;
+  transform: scaleX(1);
+}
+
+.nav-item:hover {
+  color: var(--glow-color);
+  text-shadow: 0 0 10px var(--glow-color), 0 0 20px var(--glow-color), 0 0 30px var(--glow-color), 0 0 40px var(--glow-color), 0 0 50px var(--glow-color);
 }
 
 .join-button {
@@ -78,27 +114,55 @@ body {
   border-radius: 20px;
   cursor: pointer;
   font-size: 0.9rem;
-  transition: background-color 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 .join-button:hover {
   background-color: var(--accent-color);
+  transform: translateY(-2px);
+  box-shadow: 0 0 5px var(--accent-color), 0 0 10px var(--accent-color), 0 0 20px var(--accent-color);
+}
+
+/* Mobile Menu Toggle */
+.mobile-menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--text-color);
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0;
+}
+
+.nav.active {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: var(--header-height);
+  left: 0;
+  right: 0;
+  background-color: rgba(11, 11, 11, 0.9);
+  z-index: 999;
+  padding: 1rem;
+}
+
+/* Common Section Styles */
+.hero, .about, .features, .buy {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  padding-top: calc(var(--header-height) + 2rem);
 }
 
 /* Hero Section Styles */
-.hero {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 4rem 2rem;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
 .hero-content {
-  flex: 1;
-  max-width: 50%;
-  padding-right: 2rem;
+  text-align: center;
+  max-width: 800px;
 }
 
 .welcome {
@@ -121,6 +185,7 @@ body {
 .buttons {
   display: flex;
   gap: 1rem;
+  justify-content: center;
 }
 
 .buy-button, .learn-button {
@@ -129,7 +194,7 @@ body {
   border-radius: 25px;
   cursor: pointer;
   font-size: 1rem;
-  transition: background-color 0.3s ease, transform 0.2s ease;
+  transition: all 0.3s ease;
 }
 
 .buy-button {
@@ -141,6 +206,11 @@ body {
 
 .buy-button svg {
   margin-left: 0.5rem;
+  transition: transform 0.3s ease;
+}
+
+.buy-button:hover svg {
+  transform: translateX(5px);
 }
 
 .learn-button {
@@ -149,11 +219,8 @@ body {
 }
 
 .hero-image {
-  flex: 1;
-  max-width: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  margin-top: 2rem;
+  max-width: 100%;
 }
 
 .dog-image {
@@ -162,12 +229,6 @@ body {
 }
 
 /* About Section Styles */
-.about {
-  padding: 4rem 2rem;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
 .about-title {
   font-size: 2.5rem;
   margin-bottom: 1.5rem;
@@ -201,8 +262,9 @@ body {
 
 .about-content {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   gap: 2rem;
+  max-width: 1200px;
 }
 
 .about-image {
@@ -223,46 +285,81 @@ body {
   margin-bottom: 1rem;
 }
 
+/* Features Section Styles */
+.features {
+  background: linear-gradient(45deg, #0f0f1a, #1a1a2e);
+  color: white;
+}
+
+.features-title {
+  font-size: 3rem;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.bowl-icon {
+  font-size: 2.5rem;
+  vertical-align: middle;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.feature-card {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 15px;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.feature-icon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.feature-card h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.feature-card p {
+  margin-bottom: 1.5rem;
+}
+
+.feature-button {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.feature-button:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
 /* Buy Section Styles */
-.buy {
-  padding: 4rem 2rem;
-  max-width: 1200px;
-  margin: 0 auto;
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
-}
-
-.buy.is-visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
 .buy-content {
   display: flex;
   align-items: center;
   gap: 2rem;
+  max-width: 1200px;
 }
 
 .buy-image {
   flex: 1;
   max-width: 50%;
-  opacity: 0;
-  transform: translateX(-20px);
-  transition: opacity 0.5s ease-out 0.2s, transform 0.5s ease-out 0.2s;
 }
 
 .buy-text {
   flex: 1;
-  opacity: 0;
-  transform: translateX(20px);
-  transition: opacity 0.5s ease-out 0.4s, transform 0.5s ease-out 0.4s;
-}
-
-.is-visible .buy-image,
-.is-visible .buy-text {
-  opacity: 1;
-  transform: translateX(0);
 }
 
 .buy-title {
@@ -286,7 +383,7 @@ body {
   border-radius: 25px;
   text-decoration: none;
   font-size: 1rem;
-  transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+  transition: all 0.3s ease;
 }
 
 .get-phantom-button:hover {
@@ -295,8 +392,103 @@ body {
   transform: translateY(-2px);
 }
 
-.get-phantom-button:active {
-  transform: translateY(0);
+/* Responsive Styles */
+@media screen and (max-width: 768px) {
+  .header {
+    padding: 0 1rem;
+  }
+
+  .nav {
+    display: none;
+  }
+
+  .mobile-menu-toggle {
+    display: block;
+  }
+
+  .hero, .about, .features, .buy {
+    padding: 1rem;
+    padding-top: calc(var(--header-height) + 1rem);
+  }
+
+  .welcome {
+    font-size: 2rem;
+  }
+
+  .buttons {
+    flex-direction: column;
+  }
+
+  .about-title {
+    font-size: 1.5rem;
+  }
+
+  .about-content {
+    flex-direction: column;
+    text-align: center;
+    gap: 1rem;
+  }
+
+  .about-image {
+    margin-bottom: 1rem;
+  }
+
+  .about-dog-image {
+    max-width: 150px;
+  }
+
+  .about-text {
+    width: 100%;
+    padding: 0 1rem;
+    font-size: 0.9rem;
+  }
+
+  .about-text p {
+    margin-bottom: 0.5rem;
+  }
+
+  .exchanges {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+  }
+
+  .exchange-bubble {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.8rem;
+  }
+
+  .exchange-text {
+    font-size: 0.8rem;
+  }
+
+  .features-title {
+    font-size: 2rem;
+  }
+
+  .feature-card {
+    padding: 1.5rem;
+  }
+
+  .buy-title {
+    font-size: 2rem;
+  }
+
+  .buy-text {
+    font-size: 0.9rem;
+  }
+
+  .nav.active {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: var(--header-height);
+    left: 0;
+    right: 0;
+    background-color: rgba(11, 11, 11, 0.9);
+    z-index: 999;
+    padding: 1rem;
+  }
 }
 
 /* Animation styles */
@@ -311,80 +503,71 @@ body {
   transform: translateY(0);
 }
 
-/* Responsive Styles */
-@media screen and (max-width: 768px) {
-  .header {
-    flex-wrap: wrap;
-  }
 
-  .nav {
-    order: 3;
-    width: 100%;
-    justify-content: center;
-    margin-top: 1rem;
-  }
-
-  .hero {
-    flex-direction: column;
-    text-align: center;
-    padding: 2rem 1rem;
-  }
-
-  .hero-content, .hero-image {
-    max-width: 100%;
-    padding-right: 0;
-  }
-
-  .welcome {
-    font-size: 2.5rem;
-  }
-
-  .buttons {
-    justify-content: center;
-  }
-
-  .about-content {
-    flex-direction: column;
-  }
-
-  .buy-content {
-    flex-direction: column;
-  }
-
-  .buy-image, .buy-text {
-    max-width: 100%;
-  }
-
-  .buy-title {
-    font-size: 2.5rem;
-  }
+:root {
+  --primary-color: #40E0D0;
+  --secondary-color: #4169E1;
+  --accent-color: #8A2BE2;
+  --background-color: #0B0B0B;
+  --text-color: #FFFFFF;
+  --box-border-color: #FFFFFF;
+  --copy-success-color: #28a745;
 }
 
-@media screen and (min-width: 769px) and (max-width: 1200px) {
-  .hero {
-    padding: 3rem 1.5rem;
-  }
-
-  .hero-content, .hero-image {
-    max-width: 45%;
-  }
-
-  .welcome {
-    font-size: 3rem;
-  }
+.tokenomics {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+  background-color: var(--background-color);
+  color: var(--text-color);
 }
 
-@media screen and (min-width: 1201px) {
-  .header, .hero, .about, .buy {
-    padding-left: 4rem;
-    padding-right: 4rem;
-  }
+.tokenomics-title {
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
 
-  .welcome {
-    font-size: 4.5rem;
-  }
+.tokenomics-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+  width: 100%;
+  max-width: 1200px;
+}
 
-  .about-title, .buy-title {
-    font-size: 3.5rem;
-  }
+.tokenomics-box {
+  background-color: rgba(11, 11, 11, 0.9);
+  border: 2px solid var(--box-border-color);
+  border-radius: 10px;
+  padding: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  text-align: center;
+}
+
+.tokenomics-box:hover {
+  background-color: rgba(11, 11, 11, 0.7);
+  transform: translateY(-2px);
+}
+
+.tokenomics-label {
+  display: block;
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.tokenomics-value {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.copy-notification {
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  background-color: var(--copy-success-color);
+  border-radius: 5px;
+  color: var(--text-color);
+  font-size: 1rem;
 }

@@ -1,0 +1,68 @@
+:root {
+    --primary-color: #40E0D0;
+    --secondary-color: #4169E1;
+    --accent-color: #8A2BE2;
+    --background-color: #0B0B0B;
+    --text-color: #FFFFFF;
+    --box-border-color: #FFFFFF;
+    --copy-success-color: #28a745;
+  }
+  
+  .tokenomics {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+    background-color: var(--background-color);
+    color: var(--text-color);
+  }
+  
+  .tokenomics-title {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+  
+  .tokenomics-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+    width: 100%;
+    max-width: 1200px;
+  }
+  
+  .tokenomics-box {
+    background-color: rgba(11, 11, 11, 0.9);
+    border: 2px solid var(--box-border-color);
+    border-radius: 10px;
+    padding: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    text-align: center;
+  }
+  
+  .tokenomics-box:hover {
+    background-color: rgba(11, 11, 11, 0.7);
+    transform: translateY(-2px);
+  }
+  
+  .tokenomics-label {
+    display: block;
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .tokenomics-value {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+  
+  .copy-notification {
+    margin-top: 1rem;
+    padding: 0.5rem 1rem;
+    background-color: var(--copy-success-color);
+    border-radius: 5px;
+    color: var(--text-color);
+    font-size: 1rem;
+  }
+  

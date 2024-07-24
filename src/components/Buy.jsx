@@ -1,16 +1,20 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 
 const Buy = () => {
   const buyRef = useRef(null);
-  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-          observer.unobserve(entry.target);
-        }
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.querySelectorAll('.animate-on-scroll').forEach((el, index) => {
+              setTimeout(() => {
+                el.classList.add('animate');
+              }, index * 200); // Stagger animation by 200ms
+            });
+          }
+        });
       },
       { threshold: 0.1 }
     );
@@ -27,7 +31,7 @@ const Buy = () => {
   }, []);
 
   return (
-    <section className={`buy ${isVisible ? 'is-visible' : ''}`} ref={buyRef}>
+    <section className="buy" ref={buyRef}>
       <div className="buy-content">
         <div className="buy-image animate-on-scroll">
           <svg viewBox="0 0 300 300" width="100%" height="100%">
