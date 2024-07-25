@@ -1,3 +1,4 @@
+/* Global styles and variables */
 @font-face {
   font-family: 'This Cafe';
   src: url('/This Cafe.ttf') format('truetype');
@@ -316,27 +317,34 @@ body {
   max-width: 1200px;
 }
 
+.about-title {
+  font-size: 6rem;
+}
+
 .about-image {
   flex: 1;
   position: relative;
   filter: drop-shadow(0 0 0.75rem rgb(255, 217, 0));
-
+  scale: 1.25;
 }
 
 .about-image img {
   width: 100%;
   height: auto;
   border-radius: 10px;
-  scale: 1.3;
-  z-index: -3;
 }
 
 .about-text {
   flex: 1;
+
 }
 
 .about-text p {
   margin-bottom: 1rem;
+}
+
+.about-content h1 {
+  font-size: 10rem;
 }
 
 /* Features Section Styles */
@@ -344,6 +352,8 @@ body {
   background: linear-gradient(45deg, #0f0f1a, #1a1a2e);
   color: white;
 }
+
+
 
 .features-title {
   font-family: 'This Cafe', sans-serif;

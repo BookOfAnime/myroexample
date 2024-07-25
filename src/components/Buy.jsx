@@ -35,7 +35,7 @@ const Buy = () => {
   return (
     <section className="buy" ref={buyRef}>
       <div className="buy-content">
-        <h2 className="buy-title animate-on-scroll">How to buy $MYRO</h2>
+        <h2 className="buy-title animate-on-scroll">How to buy $DOBS</h2>
         <div className="buy-steps">
           <div className="buy-step animate-on-scroll">
             <div className="step-icon">
@@ -59,9 +59,12 @@ const Buy = () => {
             <p>Use Jupiter or Raydium to buy $MYRO</p>
           </div>
         </div>
-        <a href="https://phantom.app/" className="get-phantom-button animate-on-scroll" target="_blank" rel="noopener noreferrer">
-          Get Started with Phantom
-        </a>
+        <div className="button-container">
+          <a href="https://phantom.app/" className="get-phantom-button animate-on-scroll" target="_blank" rel="noopener noreferrer">
+            Get Started with Phantom
+          </a>
+          <img src="/greenChar.png" alt="Character" className="button-character animate-on-scroll" />
+        </div>
       </div>
     </section>
   );
