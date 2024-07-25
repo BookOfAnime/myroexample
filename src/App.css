@@ -1,3 +1,8 @@
+@font-face {
+  font-family: 'This Cafe';
+  src: url('/This Cafe.ttf') format('truetype');
+}
+
 :root {
   --primary-color: #40E0D0;
   --secondary-color: #4169E1;
@@ -168,6 +173,7 @@ body {
 }
 
 .welcome {
+  font-family: 'This Cafe', sans-serif;
   font-size: 3.5rem;
   font-weight: bold;
   margin-bottom: 1rem;
@@ -272,6 +278,7 @@ body {
 
 /* About Section Styles */
 .about-title {
+  font-family: 'This Cafe', sans-serif;
   font-size: 2.5rem;
   margin-bottom: 1.5rem;
   text-align: center;
@@ -311,12 +318,13 @@ body {
 
 .about-image {
   flex: 1;
+  position: relative;
 }
 
-.about-dog-image {
+.about-image img {
   width: 100%;
-  max-width: 400px;
   height: auto;
+  border-radius: 10px;
 }
 
 .about-text {
@@ -334,6 +342,7 @@ body {
 }
 
 .features-title {
+  font-family: 'This Cafe', sans-serif;
   font-size: 3rem;
   margin-bottom: 2rem;
   text-align: center;
@@ -405,6 +414,7 @@ body {
 }
 
 .buy-title {
+  font-family: 'This Cafe', sans-serif;
   font-size: 3rem;
   margin-bottom: 1.5rem;
   font-weight: bold;
@@ -441,6 +451,7 @@ body {
 }
 
 .tokenomics-title {
+  font-family: 'This Cafe', sans-serif;
   font-size: 2.5rem;
   margin-bottom: 1.5rem;
   text-align: center;
