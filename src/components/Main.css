@@ -1,4 +1,8 @@
 /* Global styles and variables */
+@font-face {
+  font-family: 'This Cafe';
+  src: url('/This Cafe.ttf') format('truetype');
+}
 :root {
   --primary-color: #40E0D0;
   --secondary-color: #4169E1;
@@ -8,6 +12,8 @@
 }
 
 * {
+   font-family: 'This Cafe';
+
   box-sizing: border-box;
   margin: 0;
   padding: 0;
