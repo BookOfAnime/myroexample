@@ -70,7 +70,7 @@ const Hero = () => {
       <div className="hero-content">
         <h1 className="welcome animate-on-scroll">
           Welcome to <br />
-          <span className="myro-text">MYRO</span>
+          <span className="myro-text">DOBS</span>
         </h1>
         <p className="description animate-on-scroll">
           Myro the dog: Named after Solana Co-Founder Raj Gokal's dog Myro.

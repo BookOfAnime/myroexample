@@ -10,8 +10,8 @@ const Header = () => {
   return (
     <header className="header">
       <div className="logo">
-        <img src="/myro-logo.png" alt="Myro logo" className="logo-img" />
-        <span className="logo-text">MYRO</span>
+        <img src="/char.png" alt="Myro logo" className="logo-img" />
+        <span className="logo-text">$DOBS</span>
       </div>
       <button className="mobile-menu-toggle" onClick={toggleMenu}>
         ☰

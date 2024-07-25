@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
+import { gsap } from 'gsap';
 import './Main.css';
 
 const InfiniteLooper = ({ speed, direction, children }) => {
@@ -68,6 +69,7 @@ const Main = () => {
   const cardRef = useRef(null);
   const canvasRef = useRef(null);
   const particles = useRef([]);
+  const textRef = useRef(null);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -168,9 +170,22 @@ const Main = () => {
     setIsHovered(false);
   };
 
+  useEffect(() => {
+    const tl = gsap.timeline({ repeat: -1, repeatDelay: 1 });
+    tl.to(textRef.current, {
+      text: { value: "$DOBS" },
+      duration: 3,
+      ease: "power1.inOut",
+    })
+    .to(textRef.current, {
+      text: { value: "bliss" },
+      duration: 3,
+      ease: "power1.inOut",
+    });
+  }, []);
+
   return (
     <div className="main-container">
-      
       <main className="content">
         <div 
           className={`image-container ${isHovered ? 'hovered' : ''}`}
@@ -183,7 +198,9 @@ const Main = () => {
           <canvas ref={canvasRef} className="particle-canvas" />
         </div>
         <div className="text-content">
-          <h1>Matt Furie's bliss</h1>
+          <h1>
+            Matt Furie's <span ref={textRef}>bliss</span>
+          </h1>
           <h2>Rebel Dog on Solana.</h2>
         </div>
       </main>

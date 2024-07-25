@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from "react";
 
 const About = () => {
   const aboutRef = useRef(null);
@@ -8,11 +8,13 @@ const About = () => {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            entry.target.querySelectorAll('.animate-on-scroll').forEach((el, index) => {
-              setTimeout(() => {
-                el.classList.add('animate');
-              }, index * 200); // Stagger animation by 200ms
-            });
+            entry.target
+              .querySelectorAll(".animate-on-scroll")
+              .forEach((el, index) => {
+                setTimeout(() => {
+                  el.classList.add("animate");
+                }, index * 200); // Stagger animation by 200ms
+              });
           }
         });
       },
@@ -30,26 +32,48 @@ const About = () => {
     };
   }, []);
 
-  const exchanges = ['Gate.io', 'Bitget', 'BINANCE', 'crypto.com', 'KUCOIN', 'POLONIEX'];
+  const exchanges = [
+    "Gate.io",
+    "Bitget",
+    "BINANCE",
+    "crypto.com",
+    "KUCOIN",
+    "POLONIEX",
+  ];
 
   return (
     <section className="about" ref={aboutRef}>
-      <h2 className="about-title animate-on-scroll">About $MYRO</h2>
+      <h2 className="about-title animate-on-scroll">Who is $DOBS?</h2>
       <div className="exchanges">
         {exchanges.map((exchange, index) => (
           <div key={index} className="exchange-bubble animate-on-scroll">
-            <img src={`/${exchange.toLowerCase()}-logo.png`} alt={exchange} className="exchange-image" />
+            <img
+              src={`/${exchange.toLowerCase()}-logo.png`}
+              alt={exchange}
+              className="exchange-image"
+            />
             <span className="exchange-text">{exchange}</span>
           </div>
         ))}
       </div>
       <div className="about-content">
         <div className="about-image animate-on-scroll">
-          <img src="/myro.png" alt="Myro illustration" className="about-dog-image" />
+          <img
+            src="/green.png"
+            alt="Myro illustration"
+            className="about-dog-image"
+          />
         </div>
         <div className="about-text">
-          <p className="animate-on-scroll">Many may ask, what is Myro? Myro is the name of the dog owned by Raj Gokal, one of the co-founders of Solana. This project pays homage to him, and his dog, and responds to the popular demand for dog-based narratives in the crypto space.</p>
-          <p className="animate-on-scroll">Myro is more than just a cryptocurrency, it is also a movement. We believe that Solana has the potential to change the world for the better, and we are committed to making it more inclusive and welcoming for everyone.</p>
+          <p className="animate-on-scroll">
+            DOBs' is a legendary character within the Digital world of Solana,
+            known as the Guardian of Trust. He embodies integrity transparency,
+            and community protection, ensuring fairness in all transactions.
+          </p>
+          <p className="animate-on-scroll">
+            Dobs' unwavering dedication thrives and conflicts are peacefully
+            resolved, making him a referred figure in Solana's history.{" "}
+          </p>
         </div>
       </div>
     </section>

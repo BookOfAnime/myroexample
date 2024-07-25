@@ -3,6 +3,7 @@
   font-family: 'This Cafe';
   src: url('/This Cafe.ttf') format('truetype');
 }
+
 :root {
   --primary-color: #40E0D0;
   --secondary-color: #4169E1;
@@ -12,16 +13,16 @@
 }
 
 * {
-   font-family: 'This Cafe';
-
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
 body {
-  font-family: Arial, sans-serif;
+  font-family: 'This Cafe', Arial, sans-serif;
+  background-color: var(--background-color);
   color: var(--text-color);
+  line-height: 1.6;
 }
 
 /* Main container styles */
