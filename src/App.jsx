@@ -8,7 +8,6 @@ import './App.css';
 import Features from './components/Features';
 import Tokenomics from './components/Tokenomics';
 import Main from './components/Main';
-import ThreeDScene from './components/ThreeDScene';
 
 const App = () => {
   return (
