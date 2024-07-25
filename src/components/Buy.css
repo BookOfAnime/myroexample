@@ -85,7 +85,7 @@
 
 .button-character {
   position: absolute;
-  top: -60px; /* Adjust to place the character on top of the button */
+  top: 250px; /* Adjust to place the character on top of the button */
   left: 50%;
   transform: translateX(-50%);
   width: 160px; /* Adjust size as needed */
@@ -94,6 +94,7 @@
   filter: drop-shadow(0 0 10px #40E0D0);
   transition: transform 0.3s ease, filter 0.3s ease;
   pointer-events: none; /* Allow clicking the button */
+  scale: 3;
 }
 
 .get-phantom-button:hover .button-character {

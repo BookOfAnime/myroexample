@@ -11,7 +11,7 @@ import Main from './components/Main';
 
 const App = () => {
   return (
-    <SmoothScroll>
+    // <SmoothScroll>
       <div className="app">
         <Header />
         <Main />
@@ -21,7 +21,7 @@ const App = () => {
         <Features />
         <Tokenomics />
       </div>
-    </SmoothScroll>
+    // </SmoothScroll>
   );
 };
 

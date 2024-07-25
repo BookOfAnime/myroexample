@@ -23,7 +23,7 @@
 }
 
 html, body {
-  overflow: hidden;
+  overflow-x: hidden;
 }
 
 body {
@@ -34,10 +34,7 @@ body {
 }
 
 .app {
-  height: 100vh;
-  overflow-y: scroll;
-  scroll-snap-type: y mandatory;
-  scroll-behavior: smooth;
+  min-height: 100vh;
 }
 
 /* Header Styles */
@@ -162,8 +159,6 @@ body {
   justify-content: center;
   align-items: center;
   padding: 2rem;
-  scroll-snap-align: start;
-  scroll-snap-stop: always;
   padding-top: calc(var(--header-height) + 2rem);
 }
 
@@ -229,13 +224,11 @@ body {
 
 .hero-image-container {
   margin-top: 2rem;
-  width: 400px; /* Adjust width as needed */
-  height: 400px; /* Adjust height as needed */
+  width: 400px;
+  height: 400px;
   position: relative;
   border-radius: 10px;
   transition: all 0.3s ease;
-  transform-style: preserve-3d;
-  perspective: 1000px;
   overflow: visible;
 }
 
@@ -336,7 +329,6 @@ body {
 
 .about-text {
   flex: 1;
-
 }
 
 .about-text p {
@@ -352,8 +344,6 @@ body {
   background: linear-gradient(45deg, #0f0f1a, #1a1a2e);
   color: white;
 }
-
-
 
 .features-title {
   font-family: 'This Cafe', sans-serif;
@@ -514,6 +504,8 @@ body {
   font-size: 1rem;
 }
 
+/* ... (previous CSS content) ... */
+
 /* Responsive Styles */
 @media screen and (max-width: 768px) {
   .header {
@@ -611,12 +603,6 @@ body {
 
 /* Animation styles */
 .animate-on-scroll {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
-}
-
-.animate-on-scroll.animate {
   opacity: 1;
-  transform: translateY(0);
+  transform: none;
 }
