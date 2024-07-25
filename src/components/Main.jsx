@@ -170,18 +170,7 @@ const Main = () => {
 
   return (
     <div className="main-container">
-      <header className="header">
-        <div className="logo">$Dobs</div>
-        <nav className="nav">
-          <button>HOME</button>
-          <button>ABOUT</button>
-          <button>BUY</button>
-          <button>COMMUNITY</button>
-        </nav>
-        <div className="social-icons">
-          {/* Add your social media icons here */}
-        </div>
-      </header>
+      
       <main className="content">
         <div 
           className={`image-container ${isHovered ? 'hovered' : ''}`}
@@ -190,7 +179,7 @@ const Main = () => {
           onMouseLeave={handleMouseLeave}
           ref={cardRef}
         >
-          <img src="/main.jpeg" alt="Rebel Dog" />
+          <img src="/char.png" alt="Rebel Dog" />
           <canvas ref={canvasRef} className="particle-canvas" />
         </div>
         <div className="text-content">
