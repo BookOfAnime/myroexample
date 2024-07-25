@@ -1,0 +1,136 @@
+/* Buy.css */
+
+.buy {
+    background-color: #0B0B0B;
+    color: #FFFFFF;
+    padding: 4rem 2rem;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .buy-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+    width: 100%;
+  }
+  
+  .buy-title {
+    font-family: 'This Cafe', sans-serif;
+    font-size: 3.5rem;
+    margin-bottom: 3rem;
+    color: #40E0D0;
+  }
+  
+  .buy-steps {
+    display: flex;
+    justify-content: space-around;
+    gap: 2rem;
+    margin-bottom: 3rem;
+  }
+  
+  .buy-step {
+    flex: 1;
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+    padding: 2rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .buy-step:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(64, 224, 208, 0.2);
+  }
+  
+  .step-icon {
+    font-size: 3.5rem;
+    margin-bottom: 1.5rem;
+    color: #40E0D0;
+  }
+  
+  .buy-step h3 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: #40E0D0;
+  }
+  
+  .buy-step p {
+    font-size: 1.1rem;
+    color: #CCCCCC;
+  }
+  
+  .get-phantom-button {
+    display: inline-block;
+    background-color: #40E0D0;
+    color: #0B0B0B;
+    padding: 1rem 2rem;
+    border-radius: 30px;
+    font-size: 1.2rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+  
+  .get-phantom-button:hover {
+    background-color: #4169E1;
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(65, 105, 225, 0.4);
+  }
+  
+  @media screen and (max-width: 768px) {
+    .buy {
+      padding: 2rem 1rem;
+    }
+  
+    .buy-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .buy-title {
+      font-size: 2.5rem;
+      margin-bottom: 2rem;
+    }
+  
+    .buy-steps {
+      flex-direction: column;
+      gap: 1.5rem;
+      width: 100%;
+    }
+  
+    .buy-step {
+      display: flex;
+      align-items: center;
+      text-align: left;
+      padding: 1rem;
+    }
+  
+    .step-icon {
+      font-size: 2.5rem;
+      margin-bottom: 0;
+      margin-right: 1rem;
+      flex-shrink: 0;
+    }
+  
+    .step-content {
+      flex-grow: 1;
+    }
+  
+    .buy-step h3 {
+      font-size: 1.3rem;
+      margin-bottom: 0.25rem;
+    }
+  
+    .buy-step p {
+      font-size: 0.9rem;
+    }
+  
+    .get-phantom-button {
+      width: 100%;
+      padding: 0.8rem 1.6rem;
+      font-size: 1.1rem;
+      margin-top: 1.5rem;
+    }
+  }

@@ -74,6 +74,10 @@ body {
   flex-grow: 1;
 }
 
+p {
+  color: black;
+  font-size: 1.5rem;
+}
 /* Image container styles */
 .image-container {
   width: 400px;
@@ -209,5 +213,8 @@ body {
 
   .text-content h2 {
     font-size: 24px;
+  }
+  p {
+    font-size: 1rem;
   }
 }

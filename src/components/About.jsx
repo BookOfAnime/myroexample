@@ -44,7 +44,7 @@ const About = () => {
   return (
     <section className="about" ref={aboutRef}>
       <h2 className="about-title animate-on-scroll">Who is $DOBS?</h2>
-      <div className="exchanges">
+      {/* <div className="exchanges">
         {exchanges.map((exchange, index) => (
           <div key={index} className="exchange-bubble animate-on-scroll">
             <img
@@ -55,11 +55,11 @@ const About = () => {
             <span className="exchange-text">{exchange}</span>
           </div>
         ))}
-      </div>
+      </div> */}
       <div className="about-content">
         <div className="about-image animate-on-scroll">
           <img
-            src="/green.png"
+            src="/DOBS.png"
             alt="Myro illustration"
             className="about-dog-image"
           />

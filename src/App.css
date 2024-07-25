@@ -319,12 +319,16 @@ body {
 .about-image {
   flex: 1;
   position: relative;
+  filter: drop-shadow(0 0 0.75rem rgb(255, 217, 0));
+
 }
 
 .about-image img {
   width: 100%;
   height: auto;
   border-radius: 10px;
+  scale: 1.3;
+  z-index: -3;
 }
 
 .about-text {
