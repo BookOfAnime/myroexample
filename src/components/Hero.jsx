@@ -1,7 +1,11 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import '../App.css';
 
 const Hero = () => {
   const heroRef = useRef(null);
+  const imageContainerRef = useRef(null);
+  const imageRef = useRef(null);
+  const [isHovered, setIsHovered] = useState(false);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -30,6 +34,37 @@ const Hero = () => {
     };
   }, []);
 
+  const handleMouseMove = (e) => {
+    if (!imageContainerRef.current) return;
+
+    const { left, top, width, height } = imageContainerRef.current.getBoundingClientRect();
+    const x = (e.clientX - left) / width;
+    const y = (e.clientY - top) / height;
+
+    // Calculate tilt based on mouse position
+    const tiltX = (y - 0.5) * 10;
+    const tiltY = (x - 0.5) * -10;
+
+    imageContainerRef.current.style.transform = `perspective(1000px) rotateX(${tiltX}deg) rotateY(${tiltY}deg)`;
+
+    // Calculate shadow and glow based on mouse position
+    const shadowX = 30 * (x - 0.5);
+    const shadowY = 30 * (y - 0.5);
+    const hue = (x * 360) | 0;
+    imageContainerRef.current.style.boxShadow = `
+      ${shadowX}px ${shadowY}px 30px rgba(0,0,0,0.5),
+      0 0 70px 30px hsla(${hue}, 100%, 50%, 0.7)
+    `;
+  };
+
+  const handleMouseLeave = () => {
+    if (imageContainerRef.current) {
+      imageContainerRef.current.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg)';
+      imageContainerRef.current.style.boxShadow = '0 4px 8px rgba(0,0,0,0.1)';
+    }
+    setIsHovered(false);
+  };
+
   return (
     <main className="hero" ref={heroRef}>
       <div className="hero-content">
@@ -50,8 +85,14 @@ const Hero = () => {
           <button className="learn-button">Learn More</button>
         </div>
       </div>
-      <div className="hero-image animate-on-scroll">
-        <img src="/myro.png" alt="Myro the dog" className="dog-image" />
+      <div 
+        className={`hero-image-container ${isHovered ? 'hovered' : ''} animate-on-scroll`}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseMove={handleMouseMove}
+        onMouseLeave={handleMouseLeave}
+        ref={imageContainerRef}
+      >
+        <img src="/sec.webp" alt="Myro the dog" className="dog-image" ref={imageRef} />
       </div>
     </main>
   );

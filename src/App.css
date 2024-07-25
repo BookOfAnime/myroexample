@@ -6,6 +6,8 @@
   --text-color: #FFFFFF;
   --header-height: 60px;
   --glow-color: #40E0D0;
+  --box-border-color: #FFFFFF;
+  --copy-success-color: #28a745;
 }
 
 * {
@@ -147,7 +149,7 @@ body {
 }
 
 /* Common Section Styles */
-.hero, .about, .features, .buy {
+.hero, .about, .features, .buy, .tokenomics, .main-container {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -218,14 +220,54 @@ body {
   color: var(--text-color);
 }
 
-.hero-image {
+.hero-image-container {
   margin-top: 2rem;
-  max-width: 100%;
+  width: 400px; /* Adjust width as needed */
+  height: 400px; /* Adjust height as needed */
+  position: relative;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+  overflow: visible;
+}
+
+.hero-image-container:hover {
+  box-shadow: 0 30px 60px rgba(0,0,0,0.5), 0 0 70px 30px rgba(64, 224, 208, 0.7);
+}
+
+.hero-image-container::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  border-radius: 12px;
+  z-index: 1;
+  pointer-events: none;
+  transition: all 0.3s ease;
+}
+
+.hero-image-container:hover::before {
+  top: -5px;
+  left: -5px;
+  right: -5px;
+  bottom: -5px;
+  border-color: rgba(255, 255, 255, 0.8);
 }
 
 .dog-image {
-  max-width: 100%;
-  height: auto;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+  transition: transform 0.3s ease;
+}
+
+.hero-image-container:hover .dog-image {
+  transform: scale(1.05);
 }
 
 /* About Section Styles */
@@ -392,6 +434,61 @@ body {
   transform: translateY(-2px);
 }
 
+/* Tokenomics Section Styles */
+.tokenomics {
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
+.tokenomics-title {
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.tokenomics-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+  width: 100%;
+  max-width: 1200px;
+}
+
+.tokenomics-box {
+  background-color: rgba(11, 11, 11, 0.9);
+  border: 2px solid var(--box-border-color);
+  border-radius: 10px;
+  padding: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  text-align: center;
+}
+
+.tokenomics-box:hover {
+  background-color: rgba(11, 11, 11, 0.7);
+  transform: translateY(-2px);
+}
+
+.tokenomics-label {
+  display: block;
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.tokenomics-value {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.copy-notification {
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  background-color: var(--copy-success-color);
+  border-radius: 5px;
+  color: var(--text-color);
+  font-size: 1rem;
+}
+
 /* Responsive Styles */
 @media screen and (max-width: 768px) {
   .header {
@@ -406,7 +503,7 @@ body {
     display: block;
   }
 
-  .hero, .about, .features, .buy {
+  .hero, .about, .features, .buy, .tokenomics {
     padding: 1rem;
     padding-top: calc(var(--header-height) + 1rem);
   }
@@ -478,16 +575,12 @@ body {
     font-size: 0.9rem;
   }
 
-  .nav.active {
-    display: flex;
-    flex-direction: column;
-    position: fixed;
-    top: var(--header-height);
-    left: 0;
-    right: 0;
-    background-color: rgba(11, 11, 11, 0.9);
-    z-index: 999;
-    padding: 1rem;
+  .tokenomics-title {
+    font-size: 2rem;
+  }
+
+  .tokenomics-container {
+    grid-template-columns: 1fr;
   }
 }
 
@@ -501,73 +594,4 @@ body {
 .animate-on-scroll.animate {
   opacity: 1;
   transform: translateY(0);
-}
-
-
-:root {
-  --primary-color: #40E0D0;
-  --secondary-color: #4169E1;
-  --accent-color: #8A2BE2;
-  --background-color: #0B0B0B;
-  --text-color: #FFFFFF;
-  --box-border-color: #FFFFFF;
-  --copy-success-color: #28a745;
-}
-
-.tokenomics {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 2rem;
-  background-color: var(--background-color);
-  color: var(--text-color);
-}
-
-.tokenomics-title {
-  font-size: 2.5rem;
-  margin-bottom: 1.5rem;
-  text-align: center;
-}
-
-.tokenomics-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 1rem;
-  width: 100%;
-  max-width: 1200px;
-}
-
-.tokenomics-box {
-  background-color: rgba(11, 11, 11, 0.9);
-  border: 2px solid var(--box-border-color);
-  border-radius: 10px;
-  padding: 1rem;
-  cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-  text-align: center;
-}
-
-.tokenomics-box:hover {
-  background-color: rgba(11, 11, 11, 0.7);
-  transform: translateY(-2px);
-}
-
-.tokenomics-label {
-  display: block;
-  font-size: 1.2rem;
-  margin-bottom: 0.5rem;
-}
-
-.tokenomics-value {
-  font-size: 1.5rem;
-  font-weight: bold;
-}
-
-.copy-notification {
-  margin-top: 1rem;
-  padding: 0.5rem 1rem;
-  background-color: var(--copy-success-color);
-  border-radius: 5px;
-  color: var(--text-color);
-  font-size: 1rem;
 }
