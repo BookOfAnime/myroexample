@@ -31,6 +31,19 @@ body {
   display: flex;
   flex-direction: column;
   padding: 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Background tickers styles */
+.background-tickers {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+  opacity: 0.1;
 }
 
 /* Header styles */
@@ -39,6 +52,8 @@ body {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 40px;
+  position: relative;
+  z-index: 3;
 }
 
 .logo {
@@ -58,11 +73,12 @@ body {
   margin: 0 5px;
   cursor: pointer;
   border-radius: 5px;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .nav button:hover {
   background-color: #555;
+  transform: translateY(-2px);
 }
 
 /* Main content styles */
@@ -72,6 +88,8 @@ body {
   align-items: center;
   gap: 40px;
   flex-grow: 1;
+  position: relative;
+  z-index: 2;
 }
 
 p {
@@ -86,14 +104,14 @@ p {
   position: relative;
   border-radius: 10px;
   box-shadow: 0 20px 50px rgba(0,0,0,0.4), 0 0 50px 20px rgba(64, 224, 208, 0.5);
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
   transform-style: preserve-3d;
   perspective: 1000px;
   overflow: visible;
 }
 
 .image-container:hover {
-  box-shadow: 0 30px 60px rgba(0,0,0,0.5), 0 0 70px 30px rgba(64, 224, 208, 0.7);
+  box-shadow: 0 30px 60px rgba(0,0,0,0.7), 0 0 100px 50px rgba(64, 224, 208, 0.8);
 }
 
 .image-container::before {
@@ -107,15 +125,16 @@ p {
   border-radius: 12px;
   z-index: 1;
   pointer-events: none;
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
 .image-container:hover::before {
-  top: -5px;
-  left: -5px;
-  right: -5px;
-  bottom: -5px;
+  top: -10px;
+  left: -10px;
+  right: -10px;
+  bottom: -10px;
   border-color: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
 }
 
 .image-container img {
@@ -123,11 +142,11 @@ p {
   height: 100%;
   object-fit: cover;
   border-radius: 10px;
-  transition: transform 0.3s ease;
+  transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
 .image-container:hover img {
-  transform: scale(1.05);
+  transform: scale(1.05) translateZ(30px);
 }
 
 /* Particle canvas styles */
@@ -144,17 +163,33 @@ p {
 /* Text content styles */
 .text-content {
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .text-content h1 {
   font-size: 48px;
   margin-bottom: 10px;
+  position: relative;
 }
 
-.text-content h1 span {
+.animated-text-container {
   display: inline-block;
-  min-width: 100px; /* Adjust based on the longest word */
-  text-align: left;
+}
+
+.bliss-text,
+.dobs-text {
+  position: absolute;
+  left: 0;
+  top: 0;
+  white-space: nowrap;
+  opacity: 0;
+  color: var(--text-color);
+}
+
+.dobs-text {
+  color: #FFD700; /* Gold color for $DOBS */
 }
 
 .text-content h2 {
@@ -162,13 +197,25 @@ p {
   color: #333;
 }
 
-.dobs-text {
-  color: #000000; /* Black color for $DOBS */
-  font-weight: bold;
+.buy-button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  font-size: 18px;
+  color: white;
+  background-color: #4169E1;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s;
 }
 
-.bliss-text {
-  color: #FFFFFF; /* White color for bliss */
+.buy-button:hover {
+  background-color: #8A2BE2;
+  transform: translateY(-2px);
+}
+
+.buy-button:active {
+  transform: translateY(1px);
 }
 
 /* Ticker styles */
@@ -235,7 +282,29 @@ p {
     font-size: 1rem;
   }
 
-  .text-content h1 span {
-    min-width: 80px; /* Adjust for mobile */
+  .animated-text-container {
+    min-width: 80px;
+  }
+
+  .buy-button {
+    font-size: 16px;
+    padding: 8px 16px;
+  }
+}
+
+/* Smooth scrolling for the entire page */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Optimize animations for performance */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }

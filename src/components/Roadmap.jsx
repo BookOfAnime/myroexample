@@ -45,7 +45,7 @@ const Roadmap = () => {
           trigger: triggerRef.current,
           start: "top top",
           end: `+=${roadmapData.length * 150}vw`,
-          scrub: 1.5, // Slowed down the scroll speed
+          scrub: 1.5,
           pin: true,
           anticipatePin: 1,
           snap: 1 / (roadmapData.length - 1),
@@ -71,7 +71,7 @@ const Roadmap = () => {
   return (
     <section className="roadmap-section" ref={triggerRef}>
       <div className="roadmap-container" ref={sectionRef}>
-        <h2 className="roadmap-title">Our Journey <span className="compass-icon">🧭</span></h2>
+        <h2 className="roadmap-title">DOBSMAP<span className="compass-icon">🧭</span></h2>
         <div className="roadmap-cards">
           {roadmapData.map((item, index) => (
             <div key={index} className={`roadmap-card ${index === roadmapData.length - 1 ? 'last-card' : ''}`}>

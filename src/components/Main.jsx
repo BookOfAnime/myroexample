@@ -67,12 +67,52 @@ const InfiniteLooper = ({ speed, direction, children }) => {
   );
 };
 
+const BackgroundTickers = () => {
+  const [numberOfRows, setNumberOfRows] = useState(20);
+  const containerRef = useRef(null);
+
+  useEffect(() => {
+    const updateRows = () => {
+      if (containerRef.current) {
+        const containerHeight = containerRef.current.offsetHeight;
+        const newNumberOfRows = Math.ceil(containerHeight / 50);
+        setNumberOfRows(newNumberOfRows);
+      }
+    };
+
+    updateRows();
+    window.addEventListener('resize', updateRows);
+    return () => window.removeEventListener('resize', updateRows);
+  }, []);
+
+  return (
+    <div className="background-tickers" ref={containerRef}>
+      {[...Array(numberOfRows)].map((_, index) => (
+        <InfiniteLooper 
+          key={index} 
+          speed={15 + Math.random() * 10}
+          direction={index % 2 === 0 ? "left" : "right"}
+        >
+          <div className="ticker__item">$DOBS</div>
+          <div className="ticker__item">$DOBS</div>
+          <div className="ticker__item">$DOBS</div>
+          <div className="ticker__item">$DOBS</div>
+          <div className="ticker__item">$DOBS</div>
+          <div className="ticker__item">$DOBS</div>
+          <div className="ticker__item">$DOBS</div>
+        </InfiniteLooper>
+      ))}
+    </div>
+  );
+};
+
 const Main = () => {
   const [isHovered, setIsHovered] = useState(false);
   const cardRef = useRef(null);
   const canvasRef = useRef(null);
   const particles = useRef([]);
   const textRef = useRef(null);
+  const [isBliss, setIsBliss] = useState(true);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -136,17 +176,17 @@ const Main = () => {
     const x = (e.clientX - left) / width;
     const y = (e.clientY - top) / height;
 
-    const tiltX = (y - 0.5) * 10;
-    const tiltY = (x - 0.5) * -10;
+    const tiltX = (y - 0.5) * 30;
+    const tiltY = (x - 0.5) * -30;
 
-    cardRef.current.style.transform = `perspective(1000px) rotateX(${tiltX}deg) rotateY(${tiltY}deg)`;
+    cardRef.current.style.transform = `perspective(1000px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) translateZ(50px)`;
 
-    const shadowX = 30 * (x - 0.5);
-    const shadowY = 30 * (y - 0.5);
+    const shadowX = 50 * (x - 0.5);
+    const shadowY = 50 * (y - 0.5);
     const hue = (x * 360) | 0;
     cardRef.current.style.boxShadow = `
-      ${shadowX}px ${shadowY}px 30px rgba(0,0,0,0.5),
-      0 0 70px 30px hsla(${hue}, 100%, 50%, 0.7)
+      ${shadowX}px ${shadowY}px 30px rgba(0,0,0,0.7),
+      0 0 100px 50px hsla(${hue}, 100%, 50%, 0.8)
     `;
 
     const canvas = canvasRef.current;
@@ -161,8 +201,8 @@ const Main = () => {
 
   const handleMouseLeave = () => {
     if (cardRef.current) {
-      cardRef.current.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg)';
-      cardRef.current.style.boxShadow = '0 4px 8px rgba(0,0,0,0.1)';
+      cardRef.current.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateZ(0)';
+      cardRef.current.style.boxShadow = '0 10px 20px rgba(0,0,0,0.2)';
     }
     setIsHovered(false);
   };
@@ -170,28 +210,23 @@ const Main = () => {
   useEffect(() => {
     const tl = gsap.timeline({ repeat: -1, repeatDelay: 1 });
     tl.to(textRef.current, {
-      duration: 1,
+      duration: 1.5,
       text: { value: "$DOBS", delimiter: "" },
       ease: "none",
-      onStart: () => {
-        textRef.current.classList.remove('bliss-text');
-        textRef.current.classList.add('dobs-text');
-      },
+      onComplete: () => setIsBliss(false),
     })
     .to(textRef.current, {
-      duration: 1,
-      text: { value: "bliss", delimiter: "" },
+      duration: 1.5,
+      text: { value: "Bliss", delimiter: "" },
       ease: "none",
-      delay: 2,
-      onStart: () => {
-        textRef.current.classList.remove('dobs-text');
-        textRef.current.classList.add('bliss-text');
-      },
+      delay: 1.5,
+      onComplete: () => setIsBliss(true),
     });
   }, []);
 
   return (
     <div className="main-container">
+      <BackgroundTickers />
       <main className="content">
         <div 
           className={`image-container ${isHovered ? 'hovered' : ''}`}
@@ -205,20 +240,12 @@ const Main = () => {
         </div>
         <div className="text-content">
           <h1>
-            Matt Furie's <span ref={textRef} className="bliss-text">bliss</span>
+            Matt Furie's <span className="animated-text-container" ref={textRef}>Bliss</span>
           </h1>
           <h2>Rebel Dog on Solana.</h2>
+          <button className="buy-button">Buy $DOBS</button>
         </div>
       </main>
-      <InfiniteLooper speed={10} direction="left">
-        <div className="ticker__item">$DOBS</div>
-        <div className="ticker__item">$DOBS</div>
-        <div className="ticker__item">$DOBS</div>
-        <div className="ticker__item">$DOBS</div>
-        <div className="ticker__item">$DOBS</div>
-        <div className="ticker__item">$DOBS</div>
-        <div className="ticker__item">$DOBS</div>
-      </InfiniteLooper>
     </div>
   );
 };

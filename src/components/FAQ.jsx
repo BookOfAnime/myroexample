@@ -28,14 +28,16 @@ const FAQ = () => {
 
   return (
     <section className="faq-section">
-      <h2 className="faq-title">FAQ</h2>
+      <div className="faq-overlay"></div>
       <div className="faq-content">
-        <img src="/greenChar.png" alt="Character" className="faq-image" />
+        <h2 className="faq-title">FAQ</h2>
         <div className="faq-list">
           {faqData.map((item, index) => (
             <FAQItem key={index} question={item.question} answer={item.answer} />
           ))}
         </div>
+        <img src="/turn.png" alt="Character" className="faq-image" />
+
       </div>
     </section>
   );

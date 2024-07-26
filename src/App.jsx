@@ -22,7 +22,7 @@ const App = () => {
         <About />
         <Buy />
         <Roadmap />
-        <Features />
+        {/* <Features /> */}
         <Tokenomics />
         <JoinMADMovement />
         <FAQ />

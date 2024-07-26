@@ -11,6 +11,7 @@ const JoinMADMovement = () => {
 
   return (
     <div className="join-mad-movement">
+      <div className="overlay"></div>
       <div className="content-wrapper">
         <div className="text-content">
           <h1>JOIN THE MAD MOVEMENT</h1>

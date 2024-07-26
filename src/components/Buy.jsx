@@ -55,8 +55,8 @@ const Buy = () => {
             <div className="step-icon">
               <FaRocket />
             </div>
-            <h3>3. Buy $MYRO</h3>
-            <p>Use Jupiter or Raydium to buy $MYRO</p>
+            <h3>3. Buy $DOBS</h3>
+            <p>Use Jupiter or Raydium to buy $DOBS</p>
           </div>
         </div>
         <div className="button-container">
