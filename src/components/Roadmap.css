@@ -1,0 +1,124 @@
+.roadmap-section {
+    height: 100vh;
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    background-color: #0B0B0B;
+  }
+  
+  .roadmap-container {
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding-top: 0; /* Remove top padding */
+  }
+  
+  .roadmap-title {
+    font-family: 'This Cafe', sans-serif;
+    font-size: 3rem;
+    text-align: center;
+    padding: 2rem 0;
+    color: #fff;
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    background-color: rgba(11, 11, 11, 0.8);
+  }
+  
+  .compass-icon {
+    font-size: 2.5rem;
+    vertical-align: middle;
+    margin-left: 0.5rem;
+  }
+  
+  .roadmap-cards {
+    display: flex;
+    height: 100%;
+    align-items: center;
+    padding: 2rem 0;
+  }
+  
+  .roadmap-card {
+    flex: 0 0 70vw;
+    height: 70vh;
+    background-image: url('/sec.webp');
+    background-size: cover;
+    background-position: center;
+    border-radius: 20px;
+    overflow: hidden;
+    position: relative;
+    margin: 0 15vw; /* Increased margin for more space between cards */
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  
+  .roadmap-card.last-card {
+    padding-right: 15vw; /* Extra right padding for the last card */
+  }
+  
+  .roadmap-card:hover,
+  .roadmap-card.active {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+  }
+  
+  .roadmap-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 1;
+  }
+  
+  .roadmap-card-content {
+    position: relative;
+    z-index: 2;
+    padding: 2rem;
+    color: #fff;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .roadmap-card h3 {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+    color: #fff;
+  }
+  
+  .roadmap-card p {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    color: #fff;
+  }
+  
+  @media (max-width: 768px) {
+    .roadmap-title {
+      font-size: 2rem;
+    }
+  
+    .roadmap-card {
+      flex: 0 0 90vw;
+      height: 60vh;
+      margin: 0 5vw;
+    }
+  
+    .roadmap-card.last-card {
+      padding-right: 10vw; /* Extra right padding for the last card */
+    }
+  
+    .roadmap-card h3 {
+      font-size: 2rem;
+    }
+  
+    .roadmap-card p {
+      font-size: 1rem;
+    }
+  }
+  

@@ -8,6 +8,9 @@ import './App.css';
 import Features from './components/Features';
 import Tokenomics from './components/Tokenomics';
 import Main from './components/Main';
+import FAQ from './components/FAQ';
+import JoinMADMovement from './components/JoinMADMovement';
+import Roadmap from './components/Roadmap';
 
 const App = () => {
   return (
@@ -18,8 +21,11 @@ const App = () => {
         {/* <Hero /> */}
         <About />
         <Buy />
+        <Roadmap />
         <Features />
         <Tokenomics />
+        <JoinMADMovement />
+        <FAQ />
       </div>
     // </SmoothScroll>
   );

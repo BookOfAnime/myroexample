@@ -160,6 +160,7 @@
 
   .button-character {
     width: 120px; /* Adjust size for smaller screens */
-    top: -40px; /* Adjust position for smaller screens */
+    top: -100px; /* Adjust position for smaller screens */
+    scale:1.3;
   }
 }

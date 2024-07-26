@@ -78,6 +78,7 @@ p {
   color: black;
   font-size: 1.5rem;
 }
+
 /* Image container styles */
 .image-container {
   width: 400px;
@@ -150,9 +151,24 @@ p {
   margin-bottom: 10px;
 }
 
+.text-content h1 span {
+  display: inline-block;
+  min-width: 100px; /* Adjust based on the longest word */
+  text-align: left;
+}
+
 .text-content h2 {
   font-size: 36px;
   color: #333;
+}
+
+.dobs-text {
+  color: #000000; /* Black color for $DOBS */
+  font-weight: bold;
+}
+
+.bliss-text {
+  color: #FFFFFF; /* White color for bliss */
 }
 
 /* Ticker styles */
@@ -214,7 +230,12 @@ p {
   .text-content h2 {
     font-size: 24px;
   }
+
   p {
     font-size: 1rem;
+  }
+
+  .text-content h1 span {
+    min-width: 80px; /* Adjust for mobile */
   }
 }

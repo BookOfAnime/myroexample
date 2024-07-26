@@ -1,6 +1,9 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { gsap } from 'gsap';
+import { TextPlugin } from 'gsap/TextPlugin';
 import './Main.css';
+
+gsap.registerPlugin(TextPlugin);
 
 const InfiniteLooper = ({ speed, direction, children }) => {
   const [looperInstances, setLooperInstances] = useState(1);
@@ -75,7 +78,6 @@ const Main = () => {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext('2d');
 
-    // Resize canvas to match card size
     const resizeCanvas = () => {
       canvas.width = cardRef.current.offsetWidth;
       canvas.height = cardRef.current.offsetHeight;
@@ -84,7 +86,6 @@ const Main = () => {
     resizeCanvas();
     window.addEventListener('resize', resizeCanvas);
 
-    // Particle class for creating individual particles
     class Particle {
       constructor(x, y) {
         this.x = x;
@@ -109,7 +110,6 @@ const Main = () => {
       }
     }
 
-    // Animation loop for particles
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       particles.current.forEach((particle, index) => {
@@ -136,13 +136,11 @@ const Main = () => {
     const x = (e.clientX - left) / width;
     const y = (e.clientY - top) / height;
 
-    // Calculate tilt based on mouse position
     const tiltX = (y - 0.5) * 10;
     const tiltY = (x - 0.5) * -10;
 
     cardRef.current.style.transform = `perspective(1000px) rotateX(${tiltX}deg) rotateY(${tiltY}deg)`;
 
-    // Calculate shadow and glow based on mouse position
     const shadowX = 30 * (x - 0.5);
     const shadowY = 30 * (y - 0.5);
     const hue = (x * 360) | 0;
@@ -151,7 +149,6 @@ const Main = () => {
       0 0 70px 30px hsla(${hue}, 100%, 50%, 0.7)
     `;
 
-    // Add new particles at mouse position
     const canvas = canvasRef.current;
     const rect = canvas.getBoundingClientRect();
     const mouseX = e.clientX - rect.left;
@@ -173,14 +170,23 @@ const Main = () => {
   useEffect(() => {
     const tl = gsap.timeline({ repeat: -1, repeatDelay: 1 });
     tl.to(textRef.current, {
-      text: { value: "$DOBS" },
-      duration: 3,
-      ease: "power1.inOut",
+      duration: 1,
+      text: { value: "$DOBS", delimiter: "" },
+      ease: "none",
+      onStart: () => {
+        textRef.current.classList.remove('bliss-text');
+        textRef.current.classList.add('dobs-text');
+      },
     })
     .to(textRef.current, {
-      text: { value: "bliss" },
-      duration: 3,
-      ease: "power1.inOut",
+      duration: 1,
+      text: { value: "bliss", delimiter: "" },
+      ease: "none",
+      delay: 2,
+      onStart: () => {
+        textRef.current.classList.remove('dobs-text');
+        textRef.current.classList.add('bliss-text');
+      },
     });
   }, []);
 
@@ -194,12 +200,12 @@ const Main = () => {
           onMouseLeave={handleMouseLeave}
           ref={cardRef}
         >
-          <img src="/char.png" alt="Rebel Dog" />
+          <img src="/main.jpeg" alt="Rebel Dog" />
           <canvas ref={canvasRef} className="particle-canvas" />
         </div>
         <div className="text-content">
           <h1>
-            Matt Furie's <span ref={textRef}>bliss</span>
+            Matt Furie's <span ref={textRef} className="bliss-text">bliss</span>
           </h1>
           <h2>Rebel Dog on Solana.</h2>
         </div>
