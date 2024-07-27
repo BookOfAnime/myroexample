@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from "react";
+import './About.css';
 
 const About = () => {
   const aboutRef = useRef(null);
@@ -13,7 +14,7 @@ const About = () => {
               .forEach((el, index) => {
                 setTimeout(() => {
                   el.classList.add("animate");
-                }, index * 200); // Stagger animation by 200ms
+                }, index * 100); // Stagger animation by 100ms for faster effect
               });
           }
         });
@@ -32,30 +33,23 @@ const About = () => {
     };
   }, []);
 
-  const exchanges = [
-    "Gate.io",
-    "Bitget",
-    "BINANCE",
-    "crypto.com",
-    "KUCOIN",
-    "POLONIEX",
-  ];
-
   return (
     <section className="about" ref={aboutRef}>
-      <h2 className="about-title animate-on-scroll">Who is $DOBS?</h2>
-      {/* <div className="exchanges">
-        {exchanges.map((exchange, index) => (
-          <div key={index} className="exchange-bubble animate-on-scroll">
-            <img
-              src={`/${exchange.toLowerCase()}-logo.png`}
-              alt={exchange}
-              className="exchange-image"
-            />
-            <span className="exchange-text">{exchange}</span>
-          </div>
-        ))}
-      </div> */}
+      <h2 className="about-title">
+        <span className="animate-on-scroll">W</span>
+        <span className="animate-on-scroll">h</span>
+        <span className="animate-on-scroll">o</span>
+        <span className="animate-on-scroll"> </span>
+        <span className="animate-on-scroll">i</span>
+        <span className="animate-on-scroll">s</span>
+        <span className="animate-on-scroll"> </span>
+        <span className="animate-on-scroll">$</span>
+        <span className="animate-on-scroll">D</span>
+        <span className="animate-on-scroll">O</span>
+        <span className="animate-on-scroll">B</span>
+        <span className="animate-on-scroll">S</span>
+        <span className="animate-on-scroll">?</span>
+      </h2>
       <div className="about-content">
         <div className="about-image animate-on-scroll">
           <img
@@ -66,13 +60,11 @@ const About = () => {
         </div>
         <div className="about-text">
           <p className="animate-on-scroll">
-            DOBs' is a legendary character within the Digital world of Solana,
-            known as the Guardian of Trust. He embodies integrity transparency,
-            and community protection, ensuring fairness in all transactions.
+            <span className="highlight animate-on-scroll">DOBs</span> is a <span className="highlight animate-on-scroll">legendary</span> character within the Digital world of Solana,
+            known as the <span className="highlight animate-on-scroll">Guardian of Trust</span>. He embodies <span className="highlight animate-on-scroll">integrity</span>, <span className="highlight animate-on-scroll">transparency</span>, and <span className="highlight animate-on-scroll">community protection</span>, ensuring fairness in all transactions.
           </p>
           <p className="animate-on-scroll">
-            Dobs' unwavering dedication thrives and conflicts are peacefully
-            resolved, making him a referred figure in Solana's history.{" "}
+            DOBs' unwavering <span className="highlight animate-on-scroll">dedication</span> thrives and conflicts are <span className="highlight animate-on-scroll">peacefully resolved</span>, making him a referred figure in Solana's history.
           </p>
         </div>
       </div>

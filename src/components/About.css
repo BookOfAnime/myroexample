@@ -1,46 +1,6 @@
-/* Global styles and variables */
-@font-face {
-    font-family: 'This Cafe';
-    src: url('/This Cafe.ttf') format('truetype');
-  }
-  
-  :root {
-    --primary-color: #40E0D0;
-    --secondary-color: #4169E1;
-    --accent-color: #8A2BE2;
-    --background-color: #0B0B0B;
-    --text-color: #FFFFFF;
-    --header-height: 60px;
-    --glow-color: #FFD700;
-    --box-border-color: #FFFFFF;
-    --copy-success-color: #28a745;
-  }
-  
-  * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-  }
-  
-  html, body {
-    overflow-x: hidden;
-  }
-  
-  body {
-    font-family: Arial, sans-serif;
-    background-color: var(--background-color);
-    color: var(--text-color);
-    line-height: 1.6;
-    overflow-x: hidden;
-  }
-  
-  .app {
-    min-height: 100vh;
-    overflow-x: hidden;
-  }
-  
-  /* About Section Styles */
-  .about {
+/* About.css */
+
+.about {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -52,34 +12,12 @@
   
   .about-title {
     font-family: 'This Cafe', sans-serif;
-    font-size: 2.5rem;
+    font-size: 5.5rem;
     margin-bottom: 1.5rem;
     text-align: center;
-  }
-  
-  .exchanges {
     display: flex;
-    flex-wrap: wrap;
     justify-content: center;
-    gap: 1rem;
-    margin-bottom: 2rem;
-  }
-  
-  .exchange-bubble {
-    background-color: rgba(255, 255, 255, 0.1);
-    border-radius: 20px;
-    padding: 0.5rem 1rem;
-    display: flex;
-    align-items: center;
-  }
-  
-  .exchange-image {
-    height: 20px;
-    margin-right: 0.5rem;
-  }
-  
-  .exchange-text {
-    font-size: 0.9rem;
+    gap: 0.2rem; /* Add gap between letters */
   }
   
   .about-content {
@@ -100,6 +38,8 @@
     width: 100%;
     height: auto;
     border-radius: 10px;
+    scale: 1.13;
+
   }
   
   .about-text {
@@ -110,10 +50,6 @@
     margin-bottom: 1rem;
     font-size: 1.6rem;
     color: rgb(192, 216, 202);
-  }
-  
-  .about-content h1 {
-    font-size: 10rem;
   }
   
   .glow {
@@ -127,11 +63,21 @@
     opacity: 1;
   }
   
-  /* Animation styles */
+  .highlight {
+    color: #FFD700; /* Gold color for highlight */
+    font-weight: bold;
+    transition: color 0.5s ease-in-out;
+  }
+  
+  .highlight.animate {
+    color: #FFD700;
+    text-shadow: 0 0 5px #FFD700, 0 0 10px #FFD700, 0 0 15px #FFD700;
+  }
+  
   .animate-on-scroll {
     opacity: 0;
     transform: translateY(20px);
-    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    transition: opacity 0.3s ease-out, transform 0.3s ease-out;
   }
   
   .animate-on-scroll.animate {
@@ -139,7 +85,6 @@
     transform: translateY(0);
   }
   
-  /* Responsive Styles */
   @media screen and (max-width: 768px) {
     .about-title {
       font-size: 1.5rem;
@@ -168,21 +113,6 @@
     .about-text p {
       margin-bottom: 0.5rem;
       font-size: 1rem;
-    }
-  
-    .exchanges {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 0.5rem;
-    }
-  
-    .exchange-bubble {
-      padding: 0.25rem 0.5rem;
-      font-size: 0.8rem;
-    }
-  
-    .exchange-text {
-      font-size: 0.8rem;
     }
   }
   
