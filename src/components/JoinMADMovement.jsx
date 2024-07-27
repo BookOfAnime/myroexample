@@ -14,7 +14,7 @@ const JoinMADMovement = () => {
       <div className="overlay"></div>
       <div className="content-wrapper">
         <div className="text-content">
-          <h1>JOIN THE MAD MOVEMENT</h1>
+          <h1>Join the $DOBS</h1>
           <p>Join the MAD Meme Club and let's have fun while making BANK!</p>
           <p>Follow us for updates so juicy, you might get a buzz!</p>
         </div>

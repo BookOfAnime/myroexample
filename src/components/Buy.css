@@ -1,5 +1,5 @@
 .buy {
-  background-color: #0B0B0B;
+  background: linear-gradient(to bottom, #0B0B0B, #0098ea); /* Gradient from black to blue */
   color: #FFFFFF;
   padding: 4rem 2rem;
   min-height: 100vh;

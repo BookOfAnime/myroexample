@@ -71,7 +71,7 @@ const Roadmap = () => {
   return (
     <section className="roadmap-section" ref={triggerRef}>
       <div className="roadmap-container" ref={sectionRef}>
-        <h2 className="roadmap-title">DOBSMAP<span className="compass-icon">🧭</span></h2>
+        <h2 className="roadmap-title">DOBSMAP</h2>
         <div className="roadmap-cards">
           {roadmapData.map((item, index) => (
             <div key={index} className={`roadmap-card ${index === roadmapData.length - 1 ? 'last-card' : ''}`}>
@@ -88,3 +88,5 @@ const Roadmap = () => {
 };
 
 export default Roadmap;
+
+// <span className="compass-icon">🧭</span><

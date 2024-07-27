@@ -1,6 +1,5 @@
-/* Tokenomics.css */
 .tokenomics {
-  background-color: #0B0B0B;
+  background: linear-gradient(to bottom, #0098ea, #0B0B0B); /* Gradient from blue to #0B0B0B */
   color: #FFFFFF;
   padding: 4rem 2rem;
   min-height: 100vh;

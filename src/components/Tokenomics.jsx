@@ -21,6 +21,7 @@ const Tokenomics = () => {
       <div className="tokenomics-title-container">
         <img src="/otherChar.png" alt="Character" className="tokenomics-character" />
         <h2 className="tokenomics-title">Tokenomics</h2>
+        <img src="/otherChar.png" alt="Character" className="tokenomics-character mirrored" />
       </div>
       <div className="tokenomics-container">
         <div className="tokenomics-row">
