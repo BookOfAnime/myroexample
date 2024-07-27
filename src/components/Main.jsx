@@ -73,6 +73,26 @@ const BackgroundTickers = () => {
   );
 };
 
+const CoolButton = () => {
+  const [isPressed, setIsPressed] = useState(false);
+
+  const handleMouseDown = () => setIsPressed(true);
+  const handleMouseUp = () => setIsPressed(false);
+
+  return (
+    <button
+      className={`cool-button ${isPressed ? 'pressed' : ''}`}
+      onMouseDown={handleMouseDown}
+      onMouseUp={handleMouseUp}
+      onMouseLeave={handleMouseUp}
+    >
+      <span className="cool-button-content">Buy $DOBS</span>
+      <span className="cool-button-glitch"></span>
+      <span className="cool-button-label">Rebel Dog Coin</span>
+    </button>
+  );
+};
+
 const Main = () => {
   const [isHovered, setIsHovered] = useState(false);
   const cardRef = useRef(null);
@@ -200,12 +220,17 @@ const Main = () => {
           <canvas ref={canvasRef} className="particle-canvas" />
         </div>
         <div className="text-content">
-          <h1>
-            Matt Furie's <span className={`animated-text fade-${fadeState} ${isYellow ? 'yellow-text' : ''}`}>{displayText}</span>
-          </h1>
-          <h2>Rebel Dog on Solana.</h2>
-          <button className="buy-button">Buy $DOBS</button>
-        </div>
+  <h1>
+    Matt Furie's
+    <span className="animated-text-wrapper">
+      <span className={`animated-text fade-${fadeState} ${isYellow ? 'yellow-text' : ''}`}>
+        {displayText}
+      </span>
+    </span>
+  </h1>
+  <h2>Rebel Dog on Solana.</h2>
+  <CoolButton />
+</div>
       </main>
     </div>
   );
