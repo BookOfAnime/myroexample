@@ -294,7 +294,7 @@ const Main = () => {
       <BackgroundTickers />
       <main className="content">
         <div className="text-content">
-          <h2 className="welcome-text" ref={welcomeTextRef}>Welcome To</h2>
+          <h1 className="welcome-text" ref={welcomeTextRef}>Welcome To</h1>
           <h1 ref={h1Ref}>Solana's Rebel Dog</h1>
           <div className="animated-text-wrapper">
             <span ref={textRef} className={`animated-text ${isYellow ? 'yellow-text' : ''}`}>{displayText}</span>
@@ -316,9 +316,9 @@ const Main = () => {
         </div>
       </main>
       <BouncingCircle imageSrc="/together.png" size={80} glowColor="#ff0000" />
-      <BouncingCircle imageSrc="/together.png" size={60} glowColor="#00ff00" />
-      <BouncingCircle imageSrc="/together.png" size={100} glowColor="#0000ff" />
-      <BouncingCircle imageSrc="/together.png" size={70} glowColor="#ffff00" />
+      <BouncingCircle imageSrc="/green.png" size={60} glowColor="#00ff00" />
+      <BouncingCircle imageSrc="/char.png" size={100} glowColor="#0000ff" />
+      <BouncingCircle imageSrc="/DOBS.png" size={70} glowColor="#ffff00" />
     </div>
   );
 };

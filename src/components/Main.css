@@ -28,6 +28,7 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  justify-content: flex-start; /* Move content higher */
   position: relative;
   overflow: hidden;
 }
@@ -53,7 +54,7 @@ body {
   flex-grow: 1;
   position: relative;
   z-index: 20;
-  padding: 40px;
+  padding: 20px 40px; /* Reduced top padding */
   overflow: visible; /* Ensure content is not cut off */
 }
 
@@ -161,7 +162,12 @@ body {
   color: black;
   opacity: 0; /* Initially hidden */
   display: inline-block; /* For animation purposes */
-  margin-bottom: 20px; /* Add some space below the welcome text */
+  position: absolute;
+  top: -6vh;
+  left: 0;
+  text-align: center;
+  margin: 0 auto;
+  width: 100%;
 }
 
 /* Cool Button Styles */
@@ -314,21 +320,14 @@ body {
   background-position: center;
   z-index: 15;
   pointer-events: none;
-  animation: bounce 20s linear infinite, glow 2s infinite alternate;
 }
 
-@keyframes bounce {
-  0%, 100% {
-    transform: translateY(0) translateX(0);
+@keyframes circularMovement {
+  0% {
+    transform: rotate(0deg) translateX(200px) rotate(0deg);
   }
-  25% {
-    transform: translateY(-50px) translateX(30px);
-  }
-  50% {
-    transform: translateY(30px) translateX(-50px);
-  }
-  75% {
-    transform: translateY(50px) translateX(20px);
+  100% {
+    transform: rotate(360deg) translateX(200px) rotate(-360deg);
   }
 }
 

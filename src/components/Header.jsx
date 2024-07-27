@@ -17,7 +17,7 @@ const Header = () => {
         <a href="#dapp">Dapp</a>
         <a href="#contact">Contact</a>
       </nav>
-      <button className="launch-app-btn">Launch App →</button>
+      <button className="launch-app-btn">Join Us! →</button>
       <button className="menu-toggle" onClick={() => setIsMenuOpen(!isMenuOpen)}>
         <span></span>
         <span></span>
