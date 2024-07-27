@@ -218,7 +218,15 @@ const Main = () => {
     <div className="main-container">
       <BackgroundTickers />
       <main className="content">
-        <div 
+        <div className="text-content">
+          <h1>Solana's Rebel Dog</h1>
+          <div className="animated-text-wrapper">
+            <span ref={textRef} className={`animated-text ${isYellow ? 'yellow-text' : ''}`}>{displayText}</span>
+          </div>
+          <h2>Rebel Dog on Solana.</h2>
+          <CoolButton />
+        </div>
+        <div
           className={`image-container ${isHovered ? 'hovered' : ''}`}
           onMouseEnter={() => setIsHovered(true)}
           onMouseMove={handleMouseMove}
@@ -227,13 +235,8 @@ const Main = () => {
         >
           <img src="/main.jpeg" alt="Rebel Dog" />
           <canvas ref={canvasRef} className="particle-canvas" />
-        </div>
-        <div className="text-content">
-          <h1>
-            Matt Furie's <span className="animated-text-wrapper"><span ref={textRef} className={`animated-text ${isYellow ? 'yellow-text' : ''}`}>{displayText}</span></span>
-          </h1>
-          <h2>Rebel Dog on Solana.</h2>
-          <CoolButton />
+          <div className="social-icon icon-twitter"></div>
+          <div className="social-icon icon-instagram"></div>
         </div>
       </main>
     </div>
