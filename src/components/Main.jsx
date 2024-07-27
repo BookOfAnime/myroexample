@@ -1,5 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { gsap } from 'gsap';
+import { TextPlugin } from 'gsap/TextPlugin';
 import './Main.css';
+
+gsap.registerPlugin(TextPlugin);
 
 const InfiniteLooper = ({ speed, direction, children }) => {
   const [looperInstances, setLooperInstances] = useState(1);
@@ -97,8 +101,8 @@ const Main = () => {
   const [isHovered, setIsHovered] = useState(false);
   const cardRef = useRef(null);
   const canvasRef = useRef(null);
+  const textRef = useRef(null);
   const [displayText, setDisplayText] = useState('Bliss');
-  const [fadeState, setFadeState] = useState('in');
   const [isYellow, setIsYellow] = useState(false);
 
   useEffect(() => {
@@ -191,15 +195,20 @@ const Main = () => {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setFadeState('out');
-      setTimeout(() => {
-        setDisplayText((prevText) => {
-          const newText = prevText === 'Bliss' ? '$DOBS' : 'Bliss';
-          setIsYellow(newText === '$DOBS');
-          return newText;
-        });
-        setFadeState('in');
-      }, 500); // Half of the transition duration
+      gsap.to(textRef.current, {
+        duration: 0.5,
+        opacity: 0,
+        scale: 0.5,
+        ease: "power2.inOut",
+        onComplete: () => {
+          setDisplayText((prevText) => {
+            const newText = prevText === 'Bliss' ? '$DOBS' : 'Bliss';
+            setIsYellow(newText === '$DOBS');
+            return newText;
+          });
+          gsap.to(textRef.current, { duration: 0.5, opacity: 1, scale: 1, ease: "power2.inOut" });
+        },
+      });
     }, 3000);
 
     return () => clearInterval(interval);
@@ -220,17 +229,12 @@ const Main = () => {
           <canvas ref={canvasRef} className="particle-canvas" />
         </div>
         <div className="text-content">
-  <h1>
-    Matt Furie's
-    <span className="animated-text-wrapper">
-      <span className={`animated-text fade-${fadeState} ${isYellow ? 'yellow-text' : ''}`}>
-        {displayText}
-      </span>
-    </span>
-  </h1>
-  <h2>Rebel Dog on Solana.</h2>
-  <CoolButton />
-</div>
+          <h1>
+            Matt Furie's <span className="animated-text-wrapper"><span ref={textRef} className={`animated-text ${isYellow ? 'yellow-text' : ''}`}>{displayText}</span></span>
+          </h1>
+          <h2>Rebel Dog on Solana.</h2>
+          <CoolButton />
+        </div>
       </main>
     </div>
   );

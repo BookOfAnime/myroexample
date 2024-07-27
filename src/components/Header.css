@@ -1,33 +1,26 @@
-/* Global styles */
+@font-face {
+  font-family: 'This Cafe';
+  src: url('/This Cafe.ttf') format('truetype');
+}
+
 :root {
-  --primary-color: #40E0D0;
+  --primary-color: #0098ea;
   --secondary-color: #4169E1;
   --accent-color: #8A2BE2;
   --background-color: #0B0B0B;
   --text-color: #FFFFFF;
+  --glow-color: #40E0D0;
 }
 
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-body {
-  font-family: 'Arial', sans-serif;
-}
-
-/* Header Styles */
 .header {
-  background-color: #333;
-  color: white;
-  padding: 1rem 1.5rem;
   position: fixed;
   width: 100%;
   top: 0;
   left: 0;
   z-index: 1000;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  background: var(--background-color);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
 }
 
 .header-container {
@@ -36,25 +29,87 @@ body {
   align-items: center;
   max-width: 1200px;
   margin: 0 auto;
+  padding: 1rem;
+  position: relative;
 }
 
 .logo {
   display: flex;
   align-items: center;
+  cursor: pointer;
+}
+
+.logo.glitch {
+  animation: glitch 0.5s steps(2, start) infinite;
+}
+
+@keyframes glitch {
+  0% { transform: translate(0); }
+  20% { transform: translate(-2px, 2px); }
+  40% { transform: translate(-2px, -2px); }
+  60% { transform: translate(2px, 2px); }
+  80% { transform: translate(2px, -2px); }
+  100% { transform: translate(0); }
 }
 
 .logo-img {
   width: 50px;
   height: 50px;
   margin-right: 0.5rem;
+  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.7));
+  transition: transform 0.3s ease;
+}
+
+.logo-img:hover {
+  transform: rotate(360deg);
 }
 
 .logo-text {
-  font-size: 1.8rem;
-  font-weight: bold;
-  background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  font-family: 'This Cafe', sans-serif;
+  font-size: 2rem;
+  color: var(--text-color);
+  text-shadow: 0 0 5px var(--glow-color), 0 0 10px var(--glow-color);
+}
+
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 1000;
+}
+
+.menu-toggle-icon {
+  width: 30px;
+  height: 3px;
+  background-color: var(--text-color);
+  position: relative;
+  transition: background-color 0.3s;
+}
+
+.menu-toggle-icon::before,
+.menu-toggle-icon::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: var(--text-color);
+  transition: transform 0.3s;
+}
+
+.menu-toggle-icon::before { top: -8px; }
+.menu-toggle-icon::after { bottom: -8px; }
+
+.menu-toggle.open .menu-toggle-icon {
+  background-color: transparent;
+}
+
+.menu-toggle.open .menu-toggle-icon::before {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+.menu-toggle.open .menu-toggle-icon::after {
+  transform: rotate(-45deg) translate(7px, -8px);
 }
 
 .navbar {
@@ -69,52 +124,82 @@ body {
 }
 
 .nav-item {
-  color: white;
+  font-family: 'This Cafe', sans-serif;
+  color: var(--text-color);
   text-decoration: none;
   margin-left: 2rem;
+  font-size: 1.2rem;
   position: relative;
   padding: 0.5rem 0;
   transition: color 0.3s ease;
 }
 
-.nav-item:hover {
-  color: var(--primary-color);
-  text-shadow: 0 0 10px var(--primary-color), 0 0 20px var(--primary-color), 0 0 30px var(--primary-color);
+.nav-item::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: var(--accent-color);
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.nav-item:hover::after {
+  transform: scaleX(1);
 }
 
 .join-button {
-  background-color: var(--secondary-color);
-  color: var(--text-color);
-  padding: 0.6rem 2rem;
-  border: none;
-  border-radius: 20px;
-  cursor: pointer;
-  font-size: 1rem;
-  transition: all 0.3s ease;
-  margin-left: 1rem;
-}
-
-.join-button:hover {
+  font-family: 'This Cafe', sans-serif;
   background-color: var(--accent-color);
-  transform: translateY(-3px);
-  box-shadow: 0 0 5px var(--accent-color), 0 0 10px var(--accent-color), 0 0 20px var(--accent-color);
-}
-
-.menu-toggle {
-  display: none;
-  background: none;
+  color: var(--text-color);
   border: none;
-  color: white;
-  font-size: 1.5rem;
+  border-radius: 30px;
+  padding: 0.8rem 1.5rem;
+  font-size: 1.1rem;
   cursor: pointer;
-  padding: 0;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
 }
 
-.menu-toggle-icon {
-  font-size: 2rem;
+.join-button::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, var(--secondary-color) 20%, transparent 20%);
+  background-size: 10px 10px;
+  opacity: 0;
+  transition: opacity 0.3s, transform 0.3s;
 }
 
-/* Mobile styles */
+.join-button:hover::before {
+  opacity: 1;
+  transform: translate(25%, 25%) rotate(45deg);
+}
+
+.button-text {
+  position: relative;
+  z-index: 1;
+}
+
+.button-icon {
+  margin-left: 0.5rem;
+  font-size: 1.2rem;
+  display: inline-block;
+  animation: wiggle 1s ease-in-out infinite;
+}
+
+@keyframes wiggle {
+  0%, 100% { transform: rotate(0); }
+  25% { transform: rotate(15deg); }
+  75% { transform: rotate(-15deg); }
+}
+
 @media screen and (max-width: 768px) {
   .menu-toggle {
     display: block;
@@ -127,9 +212,9 @@ body {
     top: 100%;
     left: 0;
     right: 0;
-    background-color: #333;
-    padding: 1.5rem;
-    z-index: 999;
+    background-color: var(--background-color);
+    padding: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   }
 
   .navbar.open {
@@ -141,6 +226,24 @@ body {
     width: 100%;
   }
 
+  .nav-item-wrapper {
+    opacity: 0;
+    transform: translateY(-20px);
+    animation: fadeIn 0.5s forwards;
+  }
+
+  @keyframes fadeIn {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .nav-item-wrapper:nth-child(1) { animation-delay: 0.1s; }
+  .nav-item-wrapper:nth-child(2) { animation-delay: 0.2s; }
+  .nav-item-wrapper:nth-child(3) { animation-delay: 0.3s; }
+  .nav-item-wrapper:nth-child(4) { animation-delay: 0.4s; }
+
   .nav-item {
     margin: 1rem 0;
     width: 100%;
@@ -149,6 +252,6 @@ body {
 
   .join-button {
     width: 100%;
-    margin: 1rem 0;
+    margin-top: 1rem;
   }
 }

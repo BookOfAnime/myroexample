@@ -133,7 +133,7 @@ body {
 .animated-text-wrapper {
   display: inline-block;
   position: relative;
-  width: 150px;
+  width: 250px;
   height: 1.2em;
   overflow: hidden;
   margin-top: 10px;
@@ -144,15 +144,8 @@ body {
   left: 0;
   top: 0;
   width: 100%;
-  transition: opacity 0.5s ease, color 0.5s ease;
-}
-
-.animated-text.fade-in {
-  opacity: 1;
-}
-
-.animated-text.fade-out {
-  opacity: 0;
+  
+  transition: opacity 0.5s ease, color 0.5s ease, transform 0.5s ease;
 }
 
 .animated-text.yellow-text {
