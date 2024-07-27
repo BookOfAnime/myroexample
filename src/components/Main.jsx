@@ -19,7 +19,7 @@ const InfiniteLooper = ({ speed, direction, children }) => {
   }
 
   function setInstanceCount(containerWidth, itemWidth) {
-    const instances = Math.ceil(containerWidth / itemWidth) + 1;
+    const instances = Math.ceil(containerWidth / itemWidth) * 2 + 1;
     setLooperInstances(instances);
   }
 
@@ -77,7 +77,7 @@ const BackgroundTickers = () => {
   );
 };
 
-const CoolButton = () => {
+const CoolButton = React.forwardRef((props, ref) => {
   const [isPressed, setIsPressed] = useState(false);
 
   const handleMouseDown = () => setIsPressed(true);
@@ -85,6 +85,7 @@ const CoolButton = () => {
 
   return (
     <button
+      ref={ref}
       className={`cool-button ${isPressed ? 'pressed' : ''}`}
       onMouseDown={handleMouseDown}
       onMouseUp={handleMouseUp}
@@ -95,6 +96,67 @@ const CoolButton = () => {
       <span className="cool-button-label">Rebel Dog Coin</span>
     </button>
   );
+});
+
+const BouncingCircle = ({ imageSrc, size, glowColor }) => {
+  const circleRef = useRef(null);
+  const [position, setPosition] = useState({ 
+    x: Math.random() * (window.innerWidth - size), 
+    y: Math.random() * (window.innerHeight - size) 
+  });
+  const [velocity, setVelocity] = useState({ 
+    x: (Math.random() - 0.5) * 1.5, 
+    y: (Math.random() - 0.5) * 1.5 
+  });
+
+  useEffect(() => {
+    let animationFrameId;
+
+    const animate = () => {
+      setPosition(prevPos => {
+        let newX = prevPos.x + velocity.x *(.05);
+        let newY = prevPos.y + velocity.y *(.05);
+        let newVelocityX = velocity.x;
+        let newVelocityY = velocity.y;
+
+        if (newX <= 0 || newX >= window.innerWidth - size) {
+          newVelocityX = -newVelocityX;
+          newX = Math.max(0, Math.min(newX, window.innerWidth - size));
+        }
+        if (newY <= 0 || newY >= window.innerHeight - size) {
+          newVelocityY = -newVelocityY;
+          newY = Math.max(0, Math.min(newY, window.innerHeight - size));
+        }
+
+        setVelocity({ x: newVelocityX, y: newVelocityY });
+
+        return { x: newX, y: newY };
+      });
+
+      animationFrameId = requestAnimationFrame(animate);
+    };
+
+    animate();
+
+    return () => {
+      cancelAnimationFrame(animationFrameId);
+    };
+  }, [size, velocity]);
+
+  return (
+    <div 
+      ref={circleRef}
+      className="bouncing-circle"
+      style={{
+        width: `${size}px`,
+        height: `${size}px`,
+        left: `${position.x}px`,
+        top: `${position.y}px`,
+        backgroundImage: `url(${imageSrc})`,
+        boxShadow: `0 0 20px ${glowColor}`
+      }}
+    />
+  );
 };
 
 const Main = () => {
@@ -102,6 +164,10 @@ const Main = () => {
   const cardRef = useRef(null);
   const canvasRef = useRef(null);
   const textRef = useRef(null);
+  const welcomeTextRef = useRef(null);
+  const h1Ref = useRef(null);
+  const h2Ref = useRef(null);
+  const buttonRef = useRef(null);
   const [displayText, setDisplayText] = useState('Bliss');
   const [isYellow, setIsYellow] = useState(false);
 
@@ -214,17 +280,27 @@ const Main = () => {
     return () => clearInterval(interval);
   }, []);
 
+  useEffect(() => {
+    const tl = gsap.timeline();
+    tl.to(welcomeTextRef.current, { duration: 1, opacity: 1, y: 0, ease: 'power2' })
+      .to(h1Ref.current, { duration: 1, opacity: 1, y: 0, ease: 'power2' }, '-=0.5')
+      .to(textRef.current, { duration: 1, opacity: 1, y: 0, ease: 'power2' }, '-=0.5')
+      .to(h2Ref.current, { duration: 1, opacity: 1, y: 0, ease: 'power2' }, '-=0.5')
+      .to(buttonRef.current, { duration: 1, opacity: 1, y: 0, ease: 'power2' }, '-=0.5');
+  }, []);
+
   return (
     <div className="main-container">
       <BackgroundTickers />
       <main className="content">
         <div className="text-content">
-          <h1>Solana's Rebel Dog</h1>
+          <h2 className="welcome-text" ref={welcomeTextRef}>Welcome To</h2>
+          <h1 ref={h1Ref}>Solana's Rebel Dog</h1>
           <div className="animated-text-wrapper">
             <span ref={textRef} className={`animated-text ${isYellow ? 'yellow-text' : ''}`}>{displayText}</span>
           </div>
-          <h2>Rebel Dog on Solana.</h2>
-          <CoolButton />
+          <h2 ref={h2Ref}>Rebel Dog on Solana.</h2>
+          <CoolButton ref={buttonRef} />
         </div>
         <div
           className={`image-container ${isHovered ? 'hovered' : ''}`}
@@ -239,6 +315,10 @@ const Main = () => {
           <div className="social-icon icon-instagram"></div>
         </div>
       </main>
+      <BouncingCircle imageSrc="/together.png" size={80} glowColor="#ff0000" />
+      <BouncingCircle imageSrc="/together.png" size={60} glowColor="#00ff00" />
+      <BouncingCircle imageSrc="/together.png" size={100} glowColor="#0000ff" />
+      <BouncingCircle imageSrc="/together.png" size={70} glowColor="#ffff00" />
     </div>
   );
 };

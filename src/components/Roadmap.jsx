@@ -13,12 +13,12 @@ const Roadmap = () => {
     {
       phase: "Phase 1",
       title: "Launch",
-      description: "Myro Buy Bot: Solana's first public BuyBot on Telegram. Promotes cross-pollination and offers free exposure through 'MYRO Trending'."
+      description: "Dobs is just the beginning. We have a lineup of innovative and fun memecoins that will capture the imagination of the crypto community. Each project will bring its unique twist, humor, and utility, contributing to a diverse and entertaining ecosystem.\NFT Collections: We are preparing to launch exclusive NFT collections that celebrate the spirit of Dobs and his adventures. These NFTs will offer unique art, special utilities, and will be key to unlocking various features and benefits within the ecosystem."
     },
     {
       phase: "Phase 2",
       title: "Expansion",
-      description: "Social-Fi mobile app: A social media app based on Solana Mobile that allows selling posted images and media as cNFTs."
+      description: "Regular Community Challenges: We will host a series of interactive and engaging community challenges. These events will not only reward participants with tokens and NFTs but also foster a strong sense of community and collaboration."
     },
     {
       phase: "Phase 3",

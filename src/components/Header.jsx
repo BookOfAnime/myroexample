@@ -4,45 +4,25 @@ import './Header.css';
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
-
   return (
     <header className="header">
-      <div className="header-container">
-        <div className="logo">
-          <img src="/char.png" alt="$DOBS logo" className="logo-img" />
-          <span className="logo-text">$DOBS</span>
-        </div>
-        <nav className={`navbar ${isMenuOpen ? 'open' : ''}`}>
-          <ul className="nav-list">
-            {['Home', 'About', 'Features', 'Buy'].map((item, index) => (
-              <li key={index} className="nav-item">
-                <a href={`#${item.toLowerCase()}`} onClick={toggleMenu}>
-                  {item}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </nav>
-        <button className="menu-toggle" onClick={toggleMenu}>
-          <span className="menu-toggle-icon"></span>
-        </button>
+      <div className="logo">
+        <img src="/DOBS.png" alt="$DOBS logo" className="logo-img" />
+        $DOBS
       </div>
-      {isMenuOpen && (
-        <div className="mobile-menu">
-          <ul className="mobile-nav-list">
-            {['Home', 'About', 'Features', 'Buy'].map((item, index) => (
-              <li key={index} className="mobile-nav-item">
-                <a href={`#${item.toLowerCase()}`} onClick={toggleMenu}>
-                  {item}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
+      <nav className={`nav-menu ${isMenuOpen ? 'open' : ''}`}>
+        <a href="#about">About</a>
+        <a href="#token">Token</a>
+        <a href="#nft">NFT</a>
+        <a href="#dapp">Dapp</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <button className="launch-app-btn">Launch App →</button>
+      <button className="menu-toggle" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
     </header>
   );
 };

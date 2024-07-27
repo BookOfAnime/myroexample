@@ -39,7 +39,7 @@ const About = () => {
         <span className="animate-on-scroll">W</span>
         <span className="animate-on-scroll">h</span>
         <span className="animate-on-scroll">o</span>
-        <span className="animate-on-scroll"> </span>
+        <span className="animate-on-scroll">   </span>
         <span className="animate-on-scroll">i</span>
         <span className="animate-on-scroll">s</span>
         <span className="animate-on-scroll"> </span>
