@@ -1,64 +1,54 @@
-import React, { useState, useRef, useEffect, useCallback } from 'react';
-import { gsap } from 'gsap';
-import { TextPlugin } from 'gsap/TextPlugin';
+import React, { useState, useRef, useEffect } from 'react';
 import './Main.css';
-
-gsap.registerPlugin(TextPlugin);
 
 const InfiniteLooper = ({ speed, direction, children }) => {
   const [looperInstances, setLooperInstances] = useState(1);
   const outerRef = useRef(null);
   const innerRef = useRef(null);
 
-  const resetAnimation = () => {
-    if (innerRef?.current) {
-      innerRef.current.setAttribute("data-animate", "false");
-      setTimeout(() => {
-        if (innerRef?.current) {
-          innerRef.current.setAttribute("data-animate", "true");
-        }
-      }, 10);
+  function resetAnimation() {
+    if (innerRef.current) {
+      innerRef.current.style.animation = 'none';
+      innerRef.current.offsetHeight; // Trigger reflow
+      innerRef.current.style.animation = null;
     }
-  };
+  }
 
-  const setupInstances = useCallback(() => {
-    if (!innerRef?.current || !outerRef?.current) return;
-
-    const { width } = innerRef.current.getBoundingClientRect();
-    const { width: parentWidth } = outerRef.current.getBoundingClientRect();
-    const widthDeficit = parentWidth - width;
-    const instanceWidth = width / innerRef.current.children.length;
-
-    if (widthDeficit) {
-      setLooperInstances(
-        looperInstances + Math.ceil(widthDeficit / instanceWidth) + 1
-      );
-    }
-
-    resetAnimation();
-  }, [looperInstances]);
-
-  useEffect(() => setupInstances(), [setupInstances]);
+  function setInstanceCount(containerWidth, itemWidth) {
+    const instances = Math.ceil(containerWidth / itemWidth) + 1;
+    setLooperInstances(instances);
+  }
 
   useEffect(() => {
-    window.addEventListener("resize", setupInstances);
+    if (innerRef.current && outerRef.current) {
+      const containerWidth = outerRef.current.offsetWidth;
+      const itemWidth = innerRef.current.firstChild.offsetWidth;
+      setInstanceCount(containerWidth, itemWidth);
+    }
+
+    function handleResize() {
+      if (innerRef.current && outerRef.current) {
+        const containerWidth = outerRef.current.offsetWidth;
+        const itemWidth = innerRef.current.firstChild.offsetWidth;
+        setInstanceCount(containerWidth, itemWidth);
+        resetAnimation();
+      }
+    }
+
+    window.addEventListener('resize', handleResize);
     return () => {
-      window.removeEventListener("resize", setupInstances);
+      window.removeEventListener('resize', handleResize);
     };
-  }, [looperInstances, setupInstances]);
+  }, []);
 
   return (
     <div className="looper" ref={outerRef}>
-      <div className="looper__innerList" ref={innerRef} data-animate="true">
+      <div className="looper__innerList" ref={innerRef} style={{
+        animationDuration: `${speed}s`,
+        animationDirection: direction === "right" ? "reverse" : "normal"
+      }}>
         {[...Array(looperInstances)].map((_, ind) => (
-          <div
-            key={ind}
-            className="looper__listInstance"
-            style={{
-              animationDuration: `${speed}s`,
-              animationDirection: direction === "right" ? "reverse" : "normal",
-            }}
-          >
+          <div key={ind} className="looper__listInstance">
             {children}
           </div>
         ))}
@@ -68,33 +58,10 @@ const InfiniteLooper = ({ speed, direction, children }) => {
 };
 
 const BackgroundTickers = () => {
-  const [numberOfRows, setNumberOfRows] = useState(20);
-  const containerRef = useRef(null);
-
-  useEffect(() => {
-    const updateRows = () => {
-      if (containerRef.current) {
-        const containerHeight = containerRef.current.offsetHeight;
-        const newNumberOfRows = Math.ceil(containerHeight / 50);
-        setNumberOfRows(newNumberOfRows);
-      }
-    };
-
-    updateRows();
-    window.addEventListener('resize', updateRows);
-    return () => window.removeEventListener('resize', updateRows);
-  }, []);
-
   return (
-    <div className="background-tickers" ref={containerRef}>
-      {[...Array(numberOfRows)].map((_, index) => (
-        <InfiniteLooper 
-          key={index} 
-          speed={15 + Math.random() * 10}
-          direction={index % 2 === 0 ? "left" : "right"}
-        >
-          <div className="ticker__item">$DOBS</div>
-          <div className="ticker__item">$DOBS</div>
+    <div className="background-tickers">
+      {[...Array(20)].map((_, index) => (
+        <InfiniteLooper key={index} speed={100} direction={index % 2 === 0 ? "left" : "right"}>
           <div className="ticker__item">$DOBS</div>
           <div className="ticker__item">$DOBS</div>
           <div className="ticker__item">$DOBS</div>
@@ -110,13 +77,14 @@ const Main = () => {
   const [isHovered, setIsHovered] = useState(false);
   const cardRef = useRef(null);
   const canvasRef = useRef(null);
-  const particles = useRef([]);
-  const textRef = useRef(null);
-  const [isBliss, setIsBliss] = useState(true);
+  const [displayText, setDisplayText] = useState('Bliss');
+  const [fadeState, setFadeState] = useState('in');
+  const [isYellow, setIsYellow] = useState(false);
 
   useEffect(() => {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext('2d');
+    let animationFrameId;
 
     const resizeCanvas = () => {
       canvas.width = cardRef.current.offsetWidth;
@@ -125,6 +93,8 @@ const Main = () => {
 
     resizeCanvas();
     window.addEventListener('resize', resizeCanvas);
+
+    const particles = [];
 
     class Particle {
       constructor(x, y) {
@@ -152,20 +122,21 @@ const Main = () => {
 
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      particles.current.forEach((particle, index) => {
+      particles.forEach((particle, index) => {
         particle.update();
         particle.draw();
         if (particle.size <= 0.2) {
-          particles.current.splice(index, 1);
+          particles.splice(index, 1);
         }
       });
-      requestAnimationFrame(animate);
+      animationFrameId = requestAnimationFrame(animate);
     };
 
     animate();
 
     return () => {
       window.removeEventListener('resize', resizeCanvas);
+      cancelAnimationFrame(animationFrameId);
     };
   }, []);
 
@@ -188,15 +159,6 @@ const Main = () => {
       ${shadowX}px ${shadowY}px 30px rgba(0,0,0,0.7),
       0 0 100px 50px hsla(${hue}, 100%, 50%, 0.8)
     `;
-
-    const canvas = canvasRef.current;
-    const rect = canvas.getBoundingClientRect();
-    const mouseX = e.clientX - rect.left;
-    const mouseY = e.clientY - rect.top;
-
-    for (let i = 0; i < 5; i++) {
-      particles.current.push(new Particle(mouseX, mouseY));
-    }
   };
 
   const handleMouseLeave = () => {
@@ -208,20 +170,19 @@ const Main = () => {
   };
 
   useEffect(() => {
-    const tl = gsap.timeline({ repeat: -1, repeatDelay: 1 });
-    tl.to(textRef.current, {
-      duration: 1.5,
-      text: { value: "$DOBS", delimiter: "" },
-      ease: "none",
-      onComplete: () => setIsBliss(false),
-    })
-    .to(textRef.current, {
-      duration: 1.5,
-      text: { value: "Bliss", delimiter: "" },
-      ease: "none",
-      delay: 1.5,
-      onComplete: () => setIsBliss(true),
-    });
+    const interval = setInterval(() => {
+      setFadeState('out');
+      setTimeout(() => {
+        setDisplayText((prevText) => {
+          const newText = prevText === 'Bliss' ? '$DOBS' : 'Bliss';
+          setIsYellow(newText === '$DOBS');
+          return newText;
+        });
+        setFadeState('in');
+      }, 500); // Half of the transition duration
+    }, 3000);
+
+    return () => clearInterval(interval);
   }, []);
 
   return (
@@ -240,7 +201,7 @@ const Main = () => {
         </div>
         <div className="text-content">
           <h1>
-            Matt Furie's <span className="animated-text-container" ref={textRef}>Bliss</span>
+            Matt Furie's <span className={`animated-text fade-${fadeState} ${isYellow ? 'yellow-text' : ''}`}>{displayText}</span>
           </h1>
           <h2>Rebel Dog on Solana.</h2>
           <button className="buy-button">Buy $DOBS</button>
