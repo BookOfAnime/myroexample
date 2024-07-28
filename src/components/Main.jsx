@@ -114,8 +114,8 @@ const BouncingCircle = ({ imageSrc, size, glowColor }) => {
 
     const animate = () => {
       setPosition(prevPos => {
-        let newX = prevPos.x + velocity.x *(.05);
-        let newY = prevPos.y + velocity.y *(.05);
+        let newX = prevPos.x + velocity.x * 0.05;
+        let newY = prevPos.y + velocity.y * 0.05;
         let newVelocityX = velocity.x;
         let newVelocityY = velocity.y;
 
@@ -281,12 +281,17 @@ const Main = () => {
   }, []);
 
   useEffect(() => {
+    gsap.set([welcomeTextRef.current, h1Ref.current, textRef.current, h2Ref.current, buttonRef.current], { 
+      opacity: 0, 
+      y: 50 
+    });
+
     const tl = gsap.timeline();
-    tl.to(welcomeTextRef.current, { duration: 1, opacity: 1, y: 0, ease: 'power2' })
-      .to(h1Ref.current, { duration: 1, opacity: 1, y: 0, ease: 'power2' }, '-=0.5')
-      .to(textRef.current, { duration: 1, opacity: 1, y: 0, ease: 'power2' }, '-=0.5')
-      .to(h2Ref.current, { duration: 1, opacity: 1, y: 0, ease: 'power2' }, '-=0.5')
-      .to(buttonRef.current, { duration: 1, opacity: 1, y: 0, ease: 'power2' }, '-=0.5');
+    tl.to(welcomeTextRef.current, { duration: 1, opacity: 1, y: 0, ease: 'power3.out' })
+      .to(h1Ref.current, { duration: 1, opacity: 1, y: 0, ease: 'power3.out' }, '-=0.5')
+      .to(textRef.current, { duration: 1, opacity: 1, y: 0, ease: 'power3.out' }, '-=0.5')
+      .to(h2Ref.current, { duration: 1, opacity: 1, y: 0, ease: 'power3.out' }, '-=0.5')
+      .to(buttonRef.current, { duration: 1, opacity: 1, y: 0, ease: 'power3.out' }, '-=0.5');
   }, []);
 
   return (

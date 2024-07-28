@@ -1,104 +1,120 @@
-@keyframes backgroundPan {
-  from {
-    background-position: 0% 50%;
-  }
-  to {
-    background-position: 100% 50%;
-  }
-}
-
 .join-mad-movement {
   background-image: url('/tweet-5.png');
   background-size: cover;
   background-position: center;
-  height: 100vh;
+  background-attachment: fixed;
+  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  color: white;
   position: relative;
   overflow: hidden;
-  animation: backgroundPan 20s linear infinite;
 }
 
-.overlay {
+.background-overlay {
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.6);
+  background: linear-gradient(45deg, rgba(255, 0, 204, 0.6), rgba(51, 51, 255, 0.6));
   z-index: 1;
 }
 
-.content-wrapper {
-  position: relative;
-  z-index: 2;
-  background-color: rgba(0, 0, 0, 0.8);
-  padding: 2rem;
-  border-radius: 15px;
+.mad-content {
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 3rem;
+  text-align: center;
   max-width: 600px;
   width: 90%;
-  text-align: center;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  z-index: 10;
+  position: relative;
 }
 
-.text-content {
-  margin-bottom: 2rem;
-}
-
-h1 {
-  font-size: 3rem;
+.mad-title {
+  font-size: 3.5rem;
+  color: #ffffff;
   margin-bottom: 1rem;
   text-transform: uppercase;
-  font-weight: bold;
+  font-weight: 900;
+  line-height: 1.2;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
-p {
+.mad-description {
   font-size: 1.2rem;
-  margin-bottom: 0.5rem;
-  line-height: 1.4;
+  color: #ffffff;
+  margin-bottom: 2rem;
+  line-height: 1.6;
 }
 
-.social-buttons {
+.mad-social-buttons {
   display: flex;
   justify-content: center;
-  gap: 1rem;
+  gap: 1.5rem;
 }
 
-.social-button {
-  background-color: #8e44ad;
-  border-radius: 10px;
-  padding: 0.5rem;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+.mad-social-button {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  padding: 1rem;
+  transition: all 0.3s ease;
 }
 
-.social-button:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 5px 15px rgba(142, 68, 173, 0.6);
+.mad-social-button:hover {
+  transform: translateY(-5px) rotate(10deg);
+  background-color: rgba(255, 255, 255, 0.4);
+  box-shadow: 0 5px 15px rgba(255, 255, 255, 0.4);
 }
 
-.social-button img {
-  width: 40px;
-  height: 40px;
+.mad-social-button img {
+  width: 30px;
+  height: 30px;
+  filter: brightness(0) invert(1);
+}
+
+.particle {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 5;
 }
 
 @media (max-width: 768px) {
-  .content-wrapper {
-    padding: 1.5rem;
+  .mad-content {
+    padding: 2rem;
   }
 
-  h1 {
-    font-size: 2rem;
+  .mad-title {
+    font-size: 2.5rem;
   }
 
-  p {
+  .mad-description {
     font-size: 1rem;
   }
 
-  .social-button img {
-    width: 30px;
-    height: 30px;
+  .mad-social-button {
+    padding: 0.8rem;
   }
+
+  .mad-social-button img {
+    width: 25px;
+    height: 25px;
+  }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
+
+.mad-title {
+  animation: float 6s ease-in-out infinite;
 }

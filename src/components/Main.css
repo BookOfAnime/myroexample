@@ -28,7 +28,7 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start; /* Move content higher */
+  justify-content: flex-start;
   position: relative;
   overflow: hidden;
 }
@@ -54,21 +54,21 @@ body {
   flex-grow: 1;
   position: relative;
   z-index: 20;
-  padding: 20px 40px; /* Reduced top padding */
-  overflow: visible; /* Ensure content is not cut off */
+  padding: 20px 40px;
+  overflow: visible;
 }
 
 .image-container {
   flex: 1;
-  max-width: 400px;
-  max-height: 400px;
+  width: 400px;
+  height: 400px;
   position: relative;
   border-radius: 50%;
   box-shadow: 0 20px 50px rgba(0,0,0,0.4), 0 0 50px 20px rgba(64, 224, 208, 0.5);
   transition: all 0.3s ease;
   transform-style: preserve-3d;
   perspective: 1000px;
-  overflow: visible;
+  overflow: hidden;
 }
 
 .image-container:hover {
@@ -160,13 +160,12 @@ body {
 
 .welcome-text {
   color: black;
-  opacity: 0; /* Initially hidden */
-  display: inline-block; /* For animation purposes */
+  display: inline-block;
+  margin-bottom: 20px;
   position: absolute;
-  top: -6vh;
+  top: -5vh;
   left: 0;
   text-align: center;
-  margin: 0 auto;
   width: 100%;
 }
 
@@ -373,7 +372,7 @@ body {
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .content {
     flex-direction: column;
     padding: 20px;
@@ -400,5 +399,125 @@ body {
   .cool-button {
     font-size: 16px;
     padding: 8px 16px;
+  }
+
+  .animated-text-wrapper {
+    font-size: 3rem;
+  }
+}
+
+/* Large Screen Styles */
+@media (min-width: 1201px) {
+  .content {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 40px 60px;
+    justify-content: space-between;
+    align-items: center;
+    gap: 60px;
+  }
+
+  .text-content {
+    flex: 1;
+    max-width: 50%;
+  }
+
+  .text-content h1 {
+    font-size: 6rem;
+    line-height: 1.1;
+  }
+
+  .animated-text-wrapper {
+    font-size: 5rem;
+    height: 1.3em;
+    margin-top: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .text-content h2 {
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+  }
+
+  .welcome-text {
+    font-size: 3rem;
+    top: -8vh;
+  }
+
+  .image-container {
+    flex: 1;
+    width: 500px;
+    height: 500px;
+  }
+
+  .cool-button {
+    padding: 20px 40px;
+    font-size: 22px;
+  }
+
+  .cool-button-label {
+    font-size: 14px;
+  }
+
+  .social-icon {
+    width: 50px;
+    height: 50px;
+  }
+
+  .icon-twitter {
+    top: -25px;
+  }
+
+  .icon-instagram {
+    bottom: -25px;
+  }
+
+  .bouncing-circle {
+    transform: scale(1.2);
+  }
+
+  .ticker__item {
+    font-size: 2.5rem;
+    padding: 0 3rem;
+  }
+}
+
+/* Extra Large Screen Styles */
+@media (min-width: 1600px) {
+  .content {
+    max-width: 1600px;
+    padding: 60px 80px;
+    gap: 80px;
+  }
+
+  .text-content h1 {
+    font-size: 7rem;
+  }
+
+  .animated-text-wrapper {
+    font-size: 6rem;
+  }
+
+  .text-content h2 {
+    font-size: 3rem;
+  }
+
+  .welcome-text {
+    font-size: 3.5rem;
+    top: -5vh;
+  }
+
+  .image-container {
+    width: 600px;
+    height: 600px;
+  }
+
+  .cool-button {
+    padding: 25px 50px;
+    font-size: 24px;
+  }
+
+  .bouncing-circle {
+    transform: scale(1.4);
   }
 }

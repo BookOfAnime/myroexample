@@ -11,11 +11,11 @@ const Header = () => {
         $DOBS
       </div>
       <nav className={`nav-menu ${isMenuOpen ? 'open' : ''}`}>
-        <a href="#about">About</a>
-        <a href="#token">Token</a>
-        <a href="#nft">NFT</a>
-        <a href="#dapp">Dapp</a>
-        <a href="#contact">Contact</a>
+        <a href="https://t.me/+rWCW2H49ZH0xNzNh">Telegram</a>
+        <a href="https://x.com/DOBS_SOLANA">X</a>
+        <a href="#nft">Discord</a>
+        {/* <a href="#dapp">Art</a>
+        <a href="#contact">Contact</a> */}
       </nav>
       <button className="launch-app-btn">Join Us! →</button>
       <button className="menu-toggle" onClick={() => setIsMenuOpen(!isMenuOpen)}>
