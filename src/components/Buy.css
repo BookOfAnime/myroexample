@@ -17,7 +17,7 @@
 
 .buy-title {
   font-family: 'This Cafe', sans-serif;
-  font-size: 3.5rem;
+  font-size: clamp(2rem, 5vw, 3.5rem);
   margin-bottom: 3rem;
   color: #40E0D0;
 }
@@ -43,19 +43,19 @@
 }
 
 .step-icon {
-  font-size: 3.5rem;
+  font-size: clamp(2rem, 4vw, 3.5rem);
   margin-bottom: 1.5rem;
   color: #40E0D0;
 }
 
 .buy-step h3 {
-  font-size: 2rem;
+  font-size: clamp(1.2rem, 3vw, 2rem);
   margin-bottom: 1rem;
   color: #40E0D0;
 }
 
 .buy-step p {
-  font-size: 1.1rem;
+  font-size: clamp(0.8rem, 2vw, 1.1rem);
   color: #CCCCCC;
 }
 
@@ -71,7 +71,7 @@
   color: #0B0B0B;
   padding: 1rem 2rem;
   border-radius: 30px;
-  font-size: 1.2rem;
+  font-size: clamp(1rem, 2vw, 1.2rem);
   text-decoration: none;
   transition: all 0.3s ease;
   position: relative;
@@ -89,7 +89,7 @@
   top: -180px;
   left: 50%;
   transform: translateX(-50%);
-  width: 160px;
+  width: clamp(100px, 20vw, 160px);
   height: auto;
   z-index: 2;
   filter: drop-shadow(0 0 10px #40E0D0);
@@ -102,52 +102,48 @@
   filter: drop-shadow(0 0 20px #40E0D0);
 }
 
-/* Mobile screens */
-@media screen and (max-width: 767px) {
-  .buy {
-    padding: 2rem 1rem;
+/* Large Screens */
+@media screen and (min-width: 1441px) {
+  .buy-content {
+    max-width: 1400px;
   }
 
-  .buy-title {
-    font-size: 2.5rem;
-    margin-bottom: 2rem;
+  .buy-step {
+    padding: 2.5rem;
+  }
+}
+
+/* Desktop and Larger Tablets */
+@media screen and (min-width: 1024px) and (max-width: 1440px) {
+  .buy-steps {
+    gap: 1.5rem;
+  }
+}
+
+/* Tablets and Smaller Desktops */
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+  .buy {
+    padding: 3rem 1.5rem;
   }
 
   .buy-steps {
-    flex-direction: column;
-    gap: 1.5rem;
+    gap: 1rem;
   }
 
   .buy-step {
     padding: 1.5rem;
   }
+}
 
-  .step-icon {
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
+/* Large Mobile Devices and Small Tablets */
+@media screen and (min-width: 481px) and (max-width: 767px) {
+  .buy {
+    padding: 2.5rem 1rem;
   }
 
-  .buy-step h3 {
-    font-size: 1.5rem;
-  }
-
-  .buy-step p {
-    font-size: 0.9rem;
-  }
-
-  .get-phantom-button {
-    padding: 0.8rem 1.6rem;
-    font-size: 1.1rem;
-    width: 100%;
-    max-width: 300px;
-  }
-
-  .button-character {
-    position: static;
-    display: block;
-    width: 120px;
-    margin: 1rem auto;
-    transform: none;
+  .buy-steps {
+    flex-direction: column;
+    gap: 1.5rem;
   }
 
   .button-container {
@@ -156,20 +152,28 @@
     align-items: center;
     width: 100%;
   }
-}
 
-/* Small mobile screens */
-@media screen and (max-width: 480px) {
-  .buy {
-    padding: 1.5rem 1rem;
+  .get-phantom-button {
+    width: 100%;
+    max-width: 300px;
   }
 
-  .buy-title {
-    font-size: 2rem;
-    margin-bottom: 1.5rem;
+  .button-character {
+    position: static;
+    display: block;
+    margin: 1rem auto;
+    transform: none;
+  }
+}
+
+/* Small Mobile Devices */
+@media screen and (max-width: 480px) {
+  .buy {
+    padding: 2rem 1rem;
   }
 
   .buy-steps {
+    flex-direction: column;
     gap: 1rem;
   }
 
@@ -177,26 +181,23 @@
     padding: 1rem;
   }
 
-  .step-icon {
-    font-size: 2rem;
-    margin-bottom: 0.5rem;
-  }
-
-  .buy-step h3 {
-    font-size: 1.2rem;
-    margin-bottom: 0.5rem;
-  }
-
-  .buy-step p {
-    font-size: 0.8rem;
+  .button-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
   }
 
   .get-phantom-button {
+    width: 100%;
     padding: 0.7rem 1.4rem;
-    font-size: 1rem;
   }
 
   .button-character {
+    position: static;
+    display: block;
+    margin: 1rem auto;
+    transform: none;
     width: 100px;
   }
 }

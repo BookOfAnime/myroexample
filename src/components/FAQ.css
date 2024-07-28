@@ -4,7 +4,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background: url('/main.jpeg') center center / cover no-repeat fixed;
+  background: url('/char.png') center center / cover no-repeat fixed;
   color: white;
   padding: 4rem 2rem;
   overflow: hidden;
