@@ -1,10 +1,10 @@
 .features {
-    padding: 4rem 2rem;
-    background-color: #0098ea;
-    color: #ffffff;
-    overflow: hidden;
-  }
-  
+  padding: 4rem 2rem;
+  background: linear-gradient(to bottom, #0B0B0B, #0098ea);
+  color: #ffffff;
+  overflow: hidden;
+  position: relative;
+}
   .features-title {
     font-size: 3rem;
     text-align: center;

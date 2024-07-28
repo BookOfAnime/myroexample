@@ -323,7 +323,9 @@ const Main = () => {
       <BouncingCircle imageSrc="/together.png" size={80} glowColor="#ff0000" />
       <BouncingCircle imageSrc="/green.png" size={60} glowColor="#00ff00" />
       <BouncingCircle imageSrc="/char.png" size={100} glowColor="#0000ff" />
+      <BouncingCircle imageSrc="/otherChar.png" size={70} glowColor="#ffff00" />
       <BouncingCircle imageSrc="/DOBS.png" size={70} glowColor="#ffff00" />
+
     </div>
   );
 };
