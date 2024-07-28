@@ -1,5 +1,5 @@
 .buy {
-  background: linear-gradient(to bottom, #0B0B0B, #0098ea); /* Gradient from black to blue */
+  background: linear-gradient(to bottom, #0B0B0B, #0098ea);
   color: #FFFFFF;
   padding: 4rem 2rem;
   min-height: 100vh;
@@ -62,6 +62,7 @@
 .button-container {
   position: relative;
   display: inline-block;
+  margin-top: 2rem;
 }
 
 .get-phantom-button {
@@ -85,32 +86,26 @@
 
 .button-character {
   position: absolute;
-  top: 250px; /* Adjust to place the character on top of the button */
+  top: -180px;
   left: 50%;
   transform: translateX(-50%);
-  width: 160px; /* Adjust size as needed */
+  width: 160px;
   height: auto;
   z-index: 2;
   filter: drop-shadow(0 0 10px #40E0D0);
   transition: transform 0.3s ease, filter 0.3s ease;
-  pointer-events: none; /* Allow clicking the button */
-  scale: 3;
+  pointer-events: none;
 }
 
-.get-phantom-button:hover .button-character {
-  transform: translateX(-50%) translateY(-10px) scale(1.1);
+.get-phantom-button:hover + .button-character {
+  transform: translateX(-50%) translateY(-10px);
   filter: drop-shadow(0 0 20px #40E0D0);
 }
 
-@media screen and (max-width: 768px) {
+/* Mobile screens */
+@media screen and (max-width: 767px) {
   .buy {
     padding: 2rem 1rem;
-  }
-
-  .buy-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
   }
 
   .buy-title {
@@ -121,30 +116,19 @@
   .buy-steps {
     flex-direction: column;
     gap: 1.5rem;
-    width: 100%;
   }
 
   .buy-step {
-    display: flex;
-    align-items: center;
-    text-align: left;
-    padding: 1rem;
+    padding: 1.5rem;
   }
 
   .step-icon {
     font-size: 2.5rem;
-    margin-bottom: 0;
-    margin-right: 1rem;
-    flex-shrink: 0;
-  }
-
-  .step-content {
-    flex-grow: 1;
+    margin-bottom: 1rem;
   }
 
   .buy-step h3 {
-    font-size: 1.3rem;
-    margin-bottom: 0.25rem;
+    font-size: 1.5rem;
   }
 
   .buy-step p {
@@ -152,15 +136,67 @@
   }
 
   .get-phantom-button {
-    width: 100%;
     padding: 0.8rem 1.6rem;
     font-size: 1.1rem;
-    margin-top: 1.5rem;
+    width: 100%;
+    max-width: 300px;
   }
 
   .button-character {
-    width: 120px; /* Adjust size for smaller screens */
-    top: -100px; /* Adjust position for smaller screens */
-    scale:1.3;
+    position: static;
+    display: block;
+    width: 120px;
+    margin: 1rem auto;
+    transform: none;
+  }
+
+  .button-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+}
+
+/* Small mobile screens */
+@media screen and (max-width: 480px) {
+  .buy {
+    padding: 1.5rem 1rem;
+  }
+
+  .buy-title {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .buy-steps {
+    gap: 1rem;
+  }
+
+  .buy-step {
+    padding: 1rem;
+  }
+
+  .step-icon {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .buy-step h3 {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .buy-step p {
+    font-size: 0.8rem;
+  }
+
+  .get-phantom-button {
+    padding: 0.7rem 1.4rem;
+    font-size: 1rem;
+  }
+
+  .button-character {
+    width: 100px;
   }
 }
