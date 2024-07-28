@@ -114,8 +114,8 @@ const BouncingCircle = ({ imageSrc, size, glowColor }) => {
 
     const animate = () => {
       setPosition(prevPos => {
-        let newX = prevPos.x + velocity.x * 0.05;
-        let newY = prevPos.y + velocity.y * 0.05;
+        let newX = prevPos.x + velocity.x * 0.01;
+        let newY = prevPos.y + velocity.y * 0.01;
         let newVelocityX = velocity.x;
         let newVelocityY = velocity.y;
 
